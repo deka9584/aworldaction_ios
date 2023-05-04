@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var loaded = false
+    @EnvironmentObject var appSettings: AppSettings
+    @State var showWelcomeView = false
+    @State var showHomeView = false
     
     var body: some View {
-        if (loaded) {
+        if (showWelcomeView) {
             WelcomeView()
+        } else if (showHomeView) {
+            Text("home view")
         } else {
             VStack {
                 Image("logo")
@@ -26,9 +30,15 @@ struct ContentView: View {
             }
             .padding()
             .onAppear() {
-                self.loaded = true
+                if (appSettings.usrToken == "") {
+                    showWelcomeView = true
+                } else {
+                    showHomeView = true
+                }
+                // Verify user token
             }
         }
+        
     }
 }
 
