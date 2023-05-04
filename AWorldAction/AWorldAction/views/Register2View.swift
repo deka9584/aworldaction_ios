@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Register2View: View {
-    @ObservedObject var components: Components
     @ObservedObject var registerModel: RegisterModel
     
     var body: some View {
@@ -26,43 +25,43 @@ struct Register2View: View {
                     }
                     Spacer()
                 }
-                Text(components.registerViewTitle)
+                Text(StringComponents.registerViewTitle)
                     .font(.title)
                     .bold()
                     .foregroundColor(Color.white)
             }
             .frame(maxWidth: .infinity, minHeight: 60)
-            .background(components.lightGreen)
+            .background(ColorComponents.lightGreen)
             
             Spacer()
             
             VStack {
-                Text(components.accountStep2)
+                Text(StringComponents.accountStep2)
                     .font(.headline)
                     .padding(.bottom)
                 
-                SecureField(components.loginPassHint, text: $registerModel.passField)
+                SecureField(StringComponents.loginPassHint, text: $registerModel.passField)
                     .textContentType(.password)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
-                    .background(components.lightGray)
+                    .background(ColorComponents.lightGray)
                     .cornerRadius(12)
                     .padding(.bottom)
                 
-                SecureField(components.confirmPassHint, text: $registerModel.confirmPassField)
+                SecureField(StringComponents.confirmPassHint, text: $registerModel.confirmPassField)
                     .textContentType(.password)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
-                    .background(components.lightGray)
+                    .background(ColorComponents.lightGray)
                     .cornerRadius(12)
                     .padding(.bottom)
                 
                 Button {
                     registerModel.submit()
                 } label: {
-                    Text(components.nextBtn)
+                    Text(StringComponents.nextBtn)
                         .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(components.lightGreen)
+                        .background(ColorComponents.lightGreen)
                         .foregroundColor(Color.white)
                         .cornerRadius(12)
                 }
@@ -76,6 +75,6 @@ struct Register2View: View {
 
 struct Register2View_Previews: PreviewProvider {
     static var previews: some View {
-        Register2View(components: Components(), registerModel: RegisterModel())
+        Register2View(registerModel: RegisterModel())
     }
 }

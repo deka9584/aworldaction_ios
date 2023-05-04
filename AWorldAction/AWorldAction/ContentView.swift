@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State var loaded = false
-    @ObservedObject var components = Components()
     
     var body: some View {
         if (loaded) {
-            WelcomeView(components: components)
+            WelcomeView()
         } else {
             VStack {
                 Image("logo")

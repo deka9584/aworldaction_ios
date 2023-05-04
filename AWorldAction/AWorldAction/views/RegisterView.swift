@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @ObservedObject var components: Components
+    @ObservedObject var welcomeModel: WelcomeModel
     @ObservedObject var registerModel = RegisterModel()
     
     var body: some View {
@@ -17,7 +17,7 @@ struct RegisterView: View {
             ZStack {
                 HStack {
                     Button {
-                        components.showRegisterView = false
+                        welcomeModel.showRegisterView = false
                     } label: {
                         Image(systemName: "arrowtriangle.backward.fill")
                             .imageScale(.large)
@@ -26,52 +26,52 @@ struct RegisterView: View {
                     }
                     Spacer()
                 }
-                Text(components.registerViewTitle)
+                Text(StringComponents.registerViewTitle)
                     .font(.title)
                     .bold()
                     .foregroundColor(Color.white)
             }
             .frame(maxWidth: .infinity, minHeight: 60)
-            .background(components.lightGreen)
+            .background(ColorComponents.lightGreen)
             
             Spacer()
             
             VStack {
-                Text(components.accountStep1)
+                Text(StringComponents.accountStep1)
                     .font(.headline)
                     .padding(.bottom)
                 
-                TextField(components.newUserHint, text: $registerModel.userField)
+                TextField(StringComponents.newUserHint, text: $registerModel.userField)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
-                    .background(components.lightGray)
+                    .background(ColorComponents.lightGray)
                     .cornerRadius(12)
                     .padding(.bottom)
                 
-                TextField(components.emailHint, text: $registerModel.emailField)
+                TextField(StringComponents.emailHint, text: $registerModel.emailField)
                     .textContentType(.emailAddress)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
-                    .background(components.lightGray)
+                    .background(ColorComponents.lightGray)
                     .cornerRadius(12)
                     .padding(.bottom)
                 
                 Button {
                     registerModel.submit()
                 } label: {
-                    Text(components.nextBtn)
+                    Text(StringComponents.nextBtn)
                         .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(components.lightGreen)
+                        .background(ColorComponents.lightGreen)
                         .foregroundColor(Color.white)
                         .cornerRadius(12)
                 }
                 
                 VStack(spacing: 14) {
                     Button {
-                        components.showRegisterView = false
-                        components.showLoginView = true
+                        welcomeModel.showRegisterView = false
+                        welcomeModel.showLoginView = true
                     } label: {
-                        Text(components.loginLink)
+                        Text(StringComponents.loginLink)
                     }
                 }
                 .padding(.vertical)
@@ -81,13 +81,13 @@ struct RegisterView: View {
             Spacer()
         }
         .fullScreenCover(isPresented: $registerModel.showChosePassword, content: {
-            Register2View(components: components, registerModel: registerModel)
+            Register2View(registerModel: registerModel)
         })
     }
 }
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView(components: Components())
+        RegisterView(welcomeModel: WelcomeModel())
     }
 }

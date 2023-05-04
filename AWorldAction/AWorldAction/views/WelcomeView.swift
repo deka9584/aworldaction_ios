@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @ObservedObject var components: Components
+    @ObservedObject var model = WelcomeModel()
     
     var body: some View {
         VStack {
@@ -24,21 +24,21 @@ struct WelcomeView: View {
                 
             VStack {
                 Button {
-                    components.showLoginView.toggle()
+                    model.showLoginView.toggle()
                 } label: {
-                    Text(components.loginBtn)
+                    Text(StringComponents.loginBtn)
                         .frame(maxWidth: 220, minHeight:50)
-                        .background(components.green)
+                        .background(ColorComponents.green)
                         .foregroundColor(Color.white)
                         .cornerRadius(12)
                 }
                 
                 Button {
-                    components.showRegisterView.toggle()
+                    model.showRegisterView.toggle()
                 } label: {
-                    Text(components.registerBtn)
+                    Text(StringComponents.registerBtn)
                         .frame(maxWidth: 220, minHeight:50)
-                        .background(components.lightGreen)
+                        .background(ColorComponents.lightGreen)
                         .foregroundColor(Color.white)
                         .cornerRadius(12)
                 }
@@ -47,16 +47,17 @@ struct WelcomeView: View {
             Spacer()
         }
         .padding()
-        .fullScreenCover(isPresented: $components.showLoginView, content: {
-            LoginView(components: components)
+        .fullScreenCover(isPresented: $model.showLoginView, content: {
+            LoginView(welcomeModel: model)
         })
-        .fullScreenCover(isPresented: $components.showRegisterView, content: {RegisterView(components: components)
+        .fullScreenCover(isPresented: $model.showRegisterView, content: {
+            RegisterView(welcomeModel: model)
         })
     }
 }
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView(components: Components())
+        WelcomeView()
     }
 }
