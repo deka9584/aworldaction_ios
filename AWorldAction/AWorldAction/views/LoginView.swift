@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var appSettings: AppSettings
     @ObservedObject var welcomeModel: WelcomeModel
     @ObservedObject var loginModel = LoginModel()
     
@@ -53,7 +54,7 @@ struct LoginView: View {
                     .padding(.bottom)
                 
                 Button {
-                    loginModel.submit()
+                    loginModel.submit(appSettings: appSettings)
                 } label: {
                     Text(StringComponents.loginBtn)
                         .frame(maxWidth: .infinity, minHeight: 50)

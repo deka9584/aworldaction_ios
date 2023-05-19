@@ -9,5 +9,5 @@ import Foundation
 
 public class AppSettings: ObservableObject {
     @Published var usrToken = ""
-    @Published var usrName = ""
+    @Published var user: User?
 }
