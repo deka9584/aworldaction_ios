@@ -13,32 +13,13 @@ struct ContentView: View {
     @State var showHomeView = false
     
     var body: some View {
-        if (showWelcomeView) {
-            WelcomeView()
-        } else if (showHomeView) {
-            Text("home view")
+        if (appSettings.usrToken != "") {
+            Text("Sei loggato")
+                .font(.title)
+            Text(appSettings.user?.name ?? "")
         } else {
-            VStack {
-                Image("logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: 240)
-                    .padding()
-                
-                ProgressView()
-                    .padding(.top)
-            }
-            .padding()
-            .onAppear() {
-                if (appSettings.usrToken == "") {
-                    showWelcomeView = true
-                } else {
-                    showHomeView = true
-                }
-                // Verify user token
-            }
+            WelcomeView()
         }
-        
     }
 }
 

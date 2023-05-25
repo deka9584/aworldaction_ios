@@ -16,7 +16,8 @@ struct StringComponents {
     private(set) static var registerBtn = "Registrati"
     private(set) static var nextBtn = "Avanti"
     
-    private(set) static var loginUserHint = "Username / E-Mail"
+    private(set) static var loginUserHint = "E-Mail"
+    private(set) static var loginError = "Errore durante l'autenticazione"
     private(set) static var loginPassHint = "Password"
     private(set) static var newUserHint = "Crea un nuovo username"
     private(set) static var emailHint = "Inserisci una e-mail"

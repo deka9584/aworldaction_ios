@@ -54,13 +54,28 @@ struct LoginView: View {
                     .padding(.bottom)
                 
                 Button {
-                    loginModel.submit(appSettings: appSettings)
+                    loginModel.sendRequest(appSettings: appSettings)
                 } label: {
-                    Text(StringComponents.loginBtn)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(ColorComponents.lightGreen)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(12)
+                    ZStack {
+                        if (loginModel.loading) {
+                            ProgressView()
+                        }
+                        
+                        Text(StringComponents.loginBtn)
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(ColorComponents.lightGreen)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(12)
+                    }
+                }
+                .disabled(loginModel.loading)
+                
+                if (loginModel.status != "") {
+                    Text(loginModel.status)
+                        .foregroundColor(Color.red)
+                        .textCase(Text.Case.uppercase)
+                        .font(.caption)
+                        .padding(.top)
                 }
                 
                 VStack(spacing: 14) {

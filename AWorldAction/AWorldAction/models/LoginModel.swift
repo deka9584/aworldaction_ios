@@ -11,12 +11,8 @@ import Alamofire
 public class LoginModel: ObservableObject {
     @Published var userField = ""
     @Published var passField = ""
-    
-    func submit(appSettings: AppSettings) {
-        sendRequest(appSettings: appSettings)
-        userField = ""
-        passField = ""
-    }
+    @Published var status = ""
+    @Published var loading = false
     
     func sendRequest(appSettings: AppSettings) {
         let url = apiUrl + "/login"
@@ -28,6 +24,8 @@ public class LoginModel: ObservableObject {
             "password": passField
         ]
         
+        loading = true
+        
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: AuthResponse.self) { response in
                 switch response.result {
@@ -36,9 +34,19 @@ public class LoginModel: ObservableObject {
                     appSettings.user = responseData.user
                     
                     case .failure(let error):
-                    // Gestisci l'errore
                     print(error)
-                    }
+                    self.status = StringComponents.loginError
+                }
+                
+                self.loading = false
             }
+        
+        resetFields()
+    }
+    
+    func resetFields() {
+        userField = ""
+        passField = ""
+        status = ""
     }
 }

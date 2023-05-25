@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import SwiftUI
 
 public class AppSettings: ObservableObject {
-    @Published var usrToken = ""
+    @AppStorage("usrToken") var usrToken = ""
     @Published var user: User?
 }
