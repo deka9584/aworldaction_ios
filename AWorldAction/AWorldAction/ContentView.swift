@@ -13,12 +13,17 @@ struct ContentView: View {
     @State var showHomeView = false
     
     var body: some View {
-        if (appSettings.usrToken != "") {
-            Text("Sei loggato")
-                .font(.title)
-            Text(appSettings.user?.name ?? "")
-        } else {
-            WelcomeView()
+        VStack {
+            if (appSettings.usrToken != "") {
+                Text("Sei loggato")
+                    .font(.title)
+                Text(appSettings.user?.name ?? "")
+            } else {
+                WelcomeView()
+            }
+        }
+        .onAppear() {
+            appSettings.checkAuth()
         }
     }
 }

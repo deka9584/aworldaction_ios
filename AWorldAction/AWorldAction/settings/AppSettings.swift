@@ -7,8 +7,39 @@
 
 import Foundation
 import SwiftUI
+import Alamofire
+
+let apiUrl = "http://127.0.0.1:8000/api"
 
 public class AppSettings: ObservableObject {
     @AppStorage("usrToken") var usrToken = ""
     @Published var user: User?
+    
+    func checkAuth() {
+        let url = apiUrl + "/loggeduser"
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: AuthResponse.self) { response in
+                switch response.result {
+                    case .success(let responseData):
+                    if response.response?.statusCode == 401 {
+                        self.usrToken = ""
+                    }
+                    
+                    if let user = responseData.user {
+                        self.user = user
+                        print(user)
+                    }
+                    
+                    print(responseData)
+                    
+                    case .failure(let error):
+                    print(error)
+                }
+            }
+    }
 }
