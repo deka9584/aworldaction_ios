@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct InprogressCampaignsView: View {
+    @EnvironmentObject var appSettings: AppSettings
+    @StateObject var campaignsModel = CampaignsModel()
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -20,16 +23,23 @@ struct InprogressCampaignsView: View {
             .background(ColorComponents.lightGreen)
             
             ScrollView {
-                CampaignListView()
+                ForEach(campaignsModel.campaignList) {
+                    campaign in
+                    CampaignBoxView(campaign: campaign)
+                }
             }
             
             Spacer()
         }
-    }
-}
-
-struct InprogressCampaignsView_Previews: PreviewProvider {
-    static var previews: some View {
-        InprogressCampaignsView()
+        .onAppear() {
+            campaignsModel.loadCampaigns(appSettings: appSettings)
+        }
+        .overlay() {
+            if (campaignsModel.loading) {
+                VStack {
+                    ProgressView()
+                }
+            }
+        }
     }
 }

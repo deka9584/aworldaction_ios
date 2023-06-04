@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct CampaignListView: View {
+struct CampaignBoxView: View {
+    @State var campaign: Campaign
+    
     var body: some View {
         VStack(spacing: 0) {
             AsyncImage(
@@ -23,7 +25,7 @@ struct CampaignListView: View {
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300)
             .clipped()
             HStack {
-                Text("Titolo campagna")
+                Text(campaign.name)
                     .font(.title2)
                     .bold()
                     .foregroundColor(Color.white)
@@ -33,7 +35,7 @@ struct CampaignListView: View {
             .background(ColorComponents.green)
             .cornerRadius(24, corners: [.bottomRight])
             HStack {
-                Text("Descrizione")
+                Text(campaign.description)
                     .foregroundColor(Color.white)
                 Spacer()
             }
@@ -90,11 +92,5 @@ struct RoundedCorner: Shape {
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
-    }
-}
-
-struct CampaignListView_Previews: PreviewProvider {
-    static var previews: some View {
-        CampaignListView()
     }
 }

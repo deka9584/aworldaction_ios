@@ -17,6 +17,12 @@ struct HomeView: View {
                     Image(systemName: "hourglass.circle")
                     Text("Campagne")
                 }
+            
+            AccountView()
+                .tabItem {
+                    Image(systemName: "person.circle")
+                    Text("Account")
+                }
         }
     }
 }
