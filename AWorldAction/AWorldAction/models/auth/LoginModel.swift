@@ -30,6 +30,10 @@ public class LoginModel: ObservableObject {
             .responseDecodable(of: AuthResponse.self) { response in
                 switch response.result {
                     case .success(let responseData):
+                    if response.response?.statusCode != 200 {
+                        self.status = responseData.message ?? "Error"
+                    }
+                    
                     if let token = responseData.token {
                         appSettings.usrToken = token
                     }
@@ -37,6 +41,8 @@ public class LoginModel: ObservableObject {
                     if let user = responseData.user {
                         appSettings.user = user
                     }
+                    
+                    print(response.response?.statusCode)
                     
                     case .failure(let error):
                     print(error)

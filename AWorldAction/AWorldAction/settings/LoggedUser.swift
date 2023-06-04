@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Codable {
+struct LoggedUser: Codable {
     let created_at: String
     let email: String
     let email_verified_at: String?

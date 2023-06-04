@@ -41,8 +41,8 @@ public class RegisterModel: ObservableObject {
             .responseDecodable(of: AuthResponse.self) { response in
                 switch response.result {
                     case .success(let responseData):
-                    if response.response?.statusCode == 401 {
-                        self.status = responseData.message ?? "Errore 401"
+                    if response.response?.statusCode != 200 {
+                        self.status = responseData.message ?? "Error"
                     }
                     
                     if let token = responseData.token {

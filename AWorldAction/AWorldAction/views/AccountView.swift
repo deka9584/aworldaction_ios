@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AccountView: View {
     @EnvironmentObject var appSettings: AppSettings
+    @State var isPresentingConfirm: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -42,6 +43,26 @@ struct AccountView: View {
             .padding()
             
             Spacer()
+            
+            HStack {
+                Button(role: .destructive) {
+                    isPresentingConfirm = true
+                } label: {
+                    Text(StringComponents.logoutBtn)
+                        .bold()
+                        .textCase(.uppercase)
+                        .padding()
+                        .foregroundColor(Color.white)
+                        .background(Color.red)
+                        .cornerRadius(12)
+                }
+                .confirmationDialog("Vuoi uscire dal tuo account?", isPresented: $isPresentingConfirm) {
+                    Button("Esci", role: .destructive) {
+                        appSettings.logout()
+                    }
+                }
+            }
+            .padding()
         }
     }
 }

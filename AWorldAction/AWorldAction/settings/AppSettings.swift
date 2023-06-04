@@ -13,7 +13,7 @@ let apiUrl = "http://127.0.0.1:8000/api"
 
 public class AppSettings: ObservableObject {
     @AppStorage("usrToken") var usrToken = ""
-    @Published var user: User?
+    @Published var user: LoggedUser?
     @Published var requestFailed = false
     
     func checkAuth() {
@@ -27,7 +27,7 @@ public class AppSettings: ObservableObject {
             .responseDecodable(of: AuthResponse.self) { response in
                 switch response.result {
                     case .success(let responseData):
-                    if response.response?.statusCode == 401 {
+                    if response.response?.statusCode != 200 {
                         self.usrToken = ""
                     }
                     

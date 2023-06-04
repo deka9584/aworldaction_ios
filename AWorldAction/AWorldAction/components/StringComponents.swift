@@ -15,6 +15,7 @@ struct StringComponents {
     private(set) static var loginBtn = "Accedi"
     private(set) static var registerBtn = "Registrati"
     private(set) static var nextBtn = "Avanti"
+    private(set) static var logoutBtn = "Disconnettiti"
     
     private(set) static var loginUserHint = "E-Mail"
     private(set) static var loginError = "Errore durante l'autenticazione"
