@@ -33,7 +33,6 @@ public class AppSettings: ObservableObject {
                     
                     if let user = responseData.user {
                         self.user = user
-                        print(user)
                     }
                     
                     self.requestFailed = false

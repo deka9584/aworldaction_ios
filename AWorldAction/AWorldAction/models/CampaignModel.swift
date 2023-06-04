@@ -6,7 +6,12 @@
 //
 
 import Foundation
+import Alamofire
 
-public class CampaignModel: ObservableObject {
+public class CampaignsModel: ObservableObject {
+    @Published var campaignList: [Campaign] = []
     
+    func loadCampaigns() {
+        
+    }
 }
