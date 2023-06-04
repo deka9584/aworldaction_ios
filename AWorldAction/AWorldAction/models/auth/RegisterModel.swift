@@ -1,27 +1,38 @@
 //
-//  LoginModel.swift
+//  RegisterModel.swift
 //  AWorldAction
 //
-//  Created by Andrea Sala on 07/04/23.
+//  Created by Andrea Sala on 17/04/23.
 //
 
 import Foundation
 import Alamofire
 
-public class LoginModel: ObservableObject {
+public class RegisterModel: ObservableObject {
     @Published var userField = ""
+    @Published var emailField = ""
     @Published var passField = ""
+    @Published var confirmPassField = ""
     @Published var status = ""
     @Published var loading = false
+    @Published var showChosePassword = false
+    
+    func nextStep() {
+        if (userField != "" && emailField != "") {
+            showChosePassword = true
+        }
+    }
     
     func sendRequest(appSettings: AppSettings) {
-        let url = apiUrl + "/login"
+        let url = apiUrl + "/signup"
         let headers: HTTPHeaders = [
-            "Accept": "application/json",
+            .accept("application/json")
         ]
         let body = [
-            "email": userField,
-            "password": passField
+            "name": userField,
+            "email": emailField,
+            "password": passField,
+            "password_confirmation": confirmPassField
         ]
         
         loading = true
@@ -30,6 +41,10 @@ public class LoginModel: ObservableObject {
             .responseDecodable(of: AuthResponse.self) { response in
                 switch response.result {
                     case .success(let responseData):
+                    if response.response?.statusCode == 401 {
+                        self.status = responseData.message ?? "Errore 401"
+                    }
+                    
                     if let token = responseData.token {
                         appSettings.usrToken = token
                     }
@@ -43,6 +58,7 @@ public class LoginModel: ObservableObject {
                     self.status = StringComponents.loginError
                 }
                 
+                self.showChosePassword = false
                 self.loading = false
             }
         
@@ -51,7 +67,8 @@ public class LoginModel: ObservableObject {
     
     func resetFields() {
         userField = ""
+        emailField = ""
         passField = ""
-        status = ""
+        confirmPassField = ""
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Register2View.swift
+//  RegisterView.swift
 //  AWorldAction
 //
 //  Created by Andrea Sala on 17/04/23.
@@ -7,8 +7,10 @@
 
 import SwiftUI
 
-struct Register2View: View {
-    @ObservedObject var registerModel: RegisterModel
+struct RegisterView: View {
+    @EnvironmentObject var appSettings: AppSettings
+    @ObservedObject var welcomeModel: WelcomeModel
+    @ObservedObject var registerModel = RegisterModel()
     
     var body: some View {
         
@@ -16,7 +18,7 @@ struct Register2View: View {
             ZStack {
                 HStack {
                     Button {
-                        registerModel.showChosePassword = false
+                        welcomeModel.showRegisterView = false
                     } label: {
                         Image(systemName: "arrowtriangle.backward.fill")
                             .imageScale(.large)
@@ -36,20 +38,19 @@ struct Register2View: View {
             Spacer()
             
             VStack {
-                Text(StringComponents.accountStep2)
+                Text(StringComponents.accountStep1)
                     .font(.headline)
                     .padding(.bottom)
                 
-                SecureField(StringComponents.loginPassHint, text: $registerModel.passField)
-                    .textContentType(.password)
+                TextField(StringComponents.newUserHint, text: $registerModel.userField)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
                     .background(ColorComponents.lightGray)
                     .cornerRadius(12)
                     .padding(.bottom)
                 
-                SecureField(StringComponents.confirmPassHint, text: $registerModel.confirmPassField)
-                    .textContentType(.password)
+                TextField(StringComponents.emailHint, text: $registerModel.emailField)
+                    .textContentType(.emailAddress)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
                     .background(ColorComponents.lightGray)
@@ -57,7 +58,7 @@ struct Register2View: View {
                     .padding(.bottom)
                 
                 Button {
-                    registerModel.submit()
+                    registerModel.nextStep()
                 } label: {
                     Text(StringComponents.nextBtn)
                         .frame(maxWidth: .infinity, minHeight: 50)
@@ -65,16 +66,37 @@ struct Register2View: View {
                         .foregroundColor(Color.white)
                         .cornerRadius(12)
                 }
+                
+                if (registerModel.status != "") {
+                    Text(registerModel.status)
+                        .foregroundColor(Color.red)
+                        .textCase(Text.Case.uppercase)
+                        .font(.caption)
+                        .padding(.top)
+                }
+                
+                VStack(spacing: 14) {
+                    Button {
+                        welcomeModel.showRegisterView = false
+                        welcomeModel.showLoginView = true
+                    } label: {
+                        Text(StringComponents.loginLink)
+                    }
+                }
+                .padding(.vertical)
             }
             .padding()
             
             Spacer()
         }
+        .fullScreenCover(isPresented: $registerModel.showChosePassword, content: {
+            Register2View(registerModel: registerModel)
+        })
     }
 }
 
-struct Register2View_Previews: PreviewProvider {
+struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        Register2View(registerModel: RegisterModel())
+        RegisterView(welcomeModel: WelcomeModel())
     }
 }

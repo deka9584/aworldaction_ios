@@ -15,9 +15,19 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if (appSettings.usrToken != "") {
-                Text("Sei loggato")
-                    .font(.title)
-                Text(appSettings.user?.name ?? "")
+                if (appSettings.requestFailed) {
+                    Image(systemName: "person.crop.circle.badge.exclamationmark.fill")
+                        .imageScale(.large)
+                    Text("Impossibile verificare l'accesso")
+                        .padding()
+                    Button {
+                        appSettings.checkAuth()
+                    } label: {
+                        Text("Riprova")
+                    }
+                } else {
+                    HomeView()
+                }
             } else {
                 WelcomeView()
             }

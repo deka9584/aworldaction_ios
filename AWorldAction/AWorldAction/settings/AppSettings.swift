@@ -14,6 +14,7 @@ let apiUrl = "http://127.0.0.1:8000/api"
 public class AppSettings: ObservableObject {
     @AppStorage("usrToken") var usrToken = ""
     @Published var user: User?
+    @Published var requestFailed = false
     
     func checkAuth() {
         let url = apiUrl + "/loggeduser"
@@ -35,9 +36,32 @@ public class AppSettings: ObservableObject {
                         print(user)
                     }
                     
+                    self.requestFailed = false
                     print(responseData)
                     
                     case .failure(let error):
+                    self.requestFailed = true
+                    print(error)
+                }
+            }
+    }
+    
+    func logout() {
+        let url = apiUrl + "/logout"
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        
+        AF.request(url, method: .post, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: AuthResponse.self) { response in
+                switch response.result {
+                    case .success(let responseData):
+                    self.usrToken = ""
+                    print(responseData)
+                    
+                    case .failure(let error):
+                    self.requestFailed = true
                     print(error)
                 }
             }

@@ -1,16 +1,15 @@
 //
-//  LoginView.swift
+//  Register2View.swift
 //  AWorldAction
 //
-//  Created by Andrea Sala on 06/04/23.
+//  Created by Andrea Sala on 17/04/23.
 //
 
 import SwiftUI
 
-struct LoginView: View {
+struct Register2View: View {
     @EnvironmentObject var appSettings: AppSettings
-    @ObservedObject var welcomeModel: WelcomeModel
-    @ObservedObject var loginModel = LoginModel()
+    @ObservedObject var registerModel: RegisterModel
     
     var body: some View {
         
@@ -18,7 +17,7 @@ struct LoginView: View {
             ZStack {
                 HStack {
                     Button {
-                        welcomeModel.showLoginView = false
+                        registerModel.showChosePassword = false
                     } label: {
                         Image(systemName: "arrowtriangle.backward.fill")
                             .imageScale(.large)
@@ -27,7 +26,7 @@ struct LoginView: View {
                     }
                     Spacer()
                 }
-                Text(StringComponents.loginViewTitle)
+                Text(StringComponents.registerViewTitle)
                     .font(.title)
                     .bold()
                     .foregroundColor(Color.white)
@@ -38,14 +37,19 @@ struct LoginView: View {
             Spacer()
             
             VStack {
-                TextField(StringComponents.loginUserHint, text: $loginModel.userField)
+                Text(StringComponents.accountStep2)
+                    .font(.headline)
+                    .padding(.bottom)
+                
+                SecureField(StringComponents.loginPassHint, text: $registerModel.passField)
+                    .textContentType(.password)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
                     .background(ColorComponents.lightGray)
                     .cornerRadius(12)
                     .padding(.bottom)
                 
-                SecureField(StringComponents.loginPassHint, text: $loginModel.passField)
+                SecureField(StringComponents.confirmPassHint, text: $registerModel.confirmPassField)
                     .textContentType(.password)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
@@ -54,45 +58,21 @@ struct LoginView: View {
                     .padding(.bottom)
                 
                 Button {
-                    loginModel.sendRequest(appSettings: appSettings)
+                    registerModel.sendRequest(appSettings: appSettings)
                 } label: {
                     ZStack {
-                        if (loginModel.loading) {
+                        if (registerModel.loading) {
                             ProgressView()
                         }
                         
-                        Text(StringComponents.loginBtn)
+                        Text(StringComponents.nextBtn)
                             .frame(maxWidth: .infinity, minHeight: 50)
                             .background(ColorComponents.lightGreen)
                             .foregroundColor(Color.white)
                             .cornerRadius(12)
                     }
                 }
-                .disabled(loginModel.loading)
-                
-                if (loginModel.status != "") {
-                    Text(loginModel.status)
-                        .foregroundColor(Color.red)
-                        .textCase(Text.Case.uppercase)
-                        .font(.caption)
-                        .padding(.top)
-                }
-                
-                VStack(spacing: 14) {
-                    Button {
-                        //Show password recovery
-                    } label: {
-                        Text(StringComponents.passRecoveryLink)
-                    }
-                    
-                    Button {
-                        welcomeModel.showLoginView = false
-                        welcomeModel.showRegisterView = true
-                    } label: {
-                        Text(StringComponents.registerBtn)
-                    }
-                }
-                .padding(.vertical)
+                .disabled(registerModel.loading)
             }
             .padding()
             
@@ -101,8 +81,8 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct Register2View_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(welcomeModel: WelcomeModel())
+        Register2View(registerModel: RegisterModel())
     }
 }
