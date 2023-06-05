@@ -18,6 +18,18 @@ struct HomeView: View {
                     Text("Campagne")
                 }
             
+            FavouritesCampaignsView()
+                .tabItem {
+                    Image(systemName: "star.circle.fill")
+                    Text("Preferiti")
+                }
+            
+            CompletedCampaignsView()
+                .tabItem {
+                    Image(systemName: "checkmark.circle.fill")
+                    Text("Completate")
+                }
+            
             AccountView()
                 .tabItem {
                     Image(systemName: "person.circle")

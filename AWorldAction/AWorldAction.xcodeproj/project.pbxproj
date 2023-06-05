@@ -11,12 +11,14 @@
 		EA19598929DF51F9006E1D5A /* StringComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA19598829DF51F9006E1D5A /* StringComponents.swift */; };
 		EA5475192A2B737900EA5210 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5475182A2B737900EA5210 /* HomeView.swift */; };
 		EA54751D2A2B749500EA5210 /* InprogressCampaignsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA54751C2A2B749500EA5210 /* InprogressCampaignsView.swift */; };
-		EA54751F2A2B773B00EA5210 /* CampaignsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA54751E2A2B773B00EA5210 /* CampaignsModel.swift */; };
+		EA54751F2A2B773B00EA5210 /* CampaignListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA54751E2A2B773B00EA5210 /* CampaignListModel.swift */; };
 		EA5475222A2B91FF00EA5210 /* CampaignBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5475212A2B91FF00EA5210 /* CampaignBoxView.swift */; };
 		EA76FD172A2CA87F00A35B95 /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD162A2CA87F00A35B95 /* Campaign.swift */; };
 		EA76FD192A2CE76200A35B95 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD182A2CE76200A35B95 /* AccountView.swift */; };
 		EA76FD1C2A2D006000A35B95 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD1B2A2D006000A35B95 /* RoundedCorner.swift */; };
 		EA76FD1E2A2D00ED00A35B95 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD1D2A2D00ED00A35B95 /* UserProfile.swift */; };
+		EA76FD222A2DD97400A35B95 /* CompletedCampaignsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD212A2DD97400A35B95 /* CompletedCampaignsView.swift */; };
+		EA76FD242A2DDC5300A35B95 /* FavouritesCampaignsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD232A2DDC5300A35B95 /* FavouritesCampaignsView.swift */; };
 		EA77776C2A176A490006F68F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EA77776B2A176A490006F68F /* Alamofire */; };
 		EA9625FA2A1773AE00D792A4 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9625F92A1773AE00D792A4 /* AuthResponse.swift */; };
 		EA9625FF2A177C8700D792A4 /* LoggedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9625FE2A177C8700D792A4 /* LoggedUser.swift */; };
@@ -39,12 +41,14 @@
 		EA19598829DF51F9006E1D5A /* StringComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringComponents.swift; sourceTree = "<group>"; };
 		EA5475182A2B737900EA5210 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EA54751C2A2B749500EA5210 /* InprogressCampaignsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InprogressCampaignsView.swift; sourceTree = "<group>"; };
-		EA54751E2A2B773B00EA5210 /* CampaignsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignsModel.swift; sourceTree = "<group>"; };
+		EA54751E2A2B773B00EA5210 /* CampaignListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignListModel.swift; sourceTree = "<group>"; };
 		EA5475212A2B91FF00EA5210 /* CampaignBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignBoxView.swift; sourceTree = "<group>"; };
 		EA76FD162A2CA87F00A35B95 /* Campaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
 		EA76FD182A2CE76200A35B95 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		EA76FD1B2A2D006000A35B95 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		EA76FD1D2A2D00ED00A35B95 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		EA76FD212A2DD97400A35B95 /* CompletedCampaignsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedCampaignsView.swift; sourceTree = "<group>"; };
+		EA76FD232A2DDC5300A35B95 /* FavouritesCampaignsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCampaignsView.swift; sourceTree = "<group>"; };
 		EA9625F92A1773AE00D792A4 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		EA9625FE2A177C8700D792A4 /* LoggedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedUser.swift; sourceTree = "<group>"; };
 		EAB3765C29E060BB003899BA /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				EA54751A2A2B737E00EA5210 /* auth */,
 				EA5475182A2B737900EA5210 /* HomeView.swift */,
 				EA54751C2A2B749500EA5210 /* InprogressCampaignsView.swift */,
+				EA76FD212A2DD97400A35B95 /* CompletedCampaignsView.swift */,
+				EA76FD232A2DDC5300A35B95 /* FavouritesCampaignsView.swift */,
 				EA76FD182A2CE76200A35B95 /* AccountView.swift */,
 			);
 			path = views;
@@ -137,7 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				EA54751B2A2B73A100EA5210 /* auth */,
-				EA54751E2A2B773B00EA5210 /* CampaignsModel.swift */,
+				EA54751E2A2B773B00EA5210 /* CampaignListModel.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -278,7 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAE244EA2A03AC1E00D03599 /* AppSettings.swift in Sources */,
-				EA54751F2A2B773B00EA5210 /* CampaignsModel.swift in Sources */,
+				EA54751F2A2B773B00EA5210 /* CampaignListModel.swift in Sources */,
 				FF2E1E9729D57C380033072D /* ContentView.swift in Sources */,
 				EA54751D2A2B749500EA5210 /* InprogressCampaignsView.swift in Sources */,
 				EA76FD192A2CE76200A35B95 /* AccountView.swift in Sources */,
@@ -291,12 +297,14 @@
 				EA9625FA2A1773AE00D792A4 /* AuthResponse.swift in Sources */,
 				EAE244E22A039EEF00D03599 /* WelcomeModel.swift in Sources */,
 				EAC7BF1829EDAD8D001650E7 /* RegisterModel.swift in Sources */,
+				EA76FD242A2DDC5300A35B95 /* FavouritesCampaignsView.swift in Sources */,
 				EA76FD172A2CA87F00A35B95 /* Campaign.swift in Sources */,
 				EA19598929DF51F9006E1D5A /* StringComponents.swift in Sources */,
 				EA76FD1E2A2D00ED00A35B95 /* UserProfile.swift in Sources */,
 				EA19598729DEDD6B006E1D5A /* LoginView.swift in Sources */,
 				EAE244E52A03A13300D03599 /* ColorComponents.swift in Sources */,
 				FF2E1E9529D57C380033072D /* AWorldActionApp.swift in Sources */,
+				EA76FD222A2DD97400A35B95 /* CompletedCampaignsView.swift in Sources */,
 				EA5475222A2B91FF00EA5210 /* CampaignBoxView.swift in Sources */,
 				EAC7BF1C29EDB90C001650E7 /* Register2View.swift in Sources */,
 			);

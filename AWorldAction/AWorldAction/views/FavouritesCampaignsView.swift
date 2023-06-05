@@ -1,20 +1,20 @@
 //
-//  InprogressCampaignsView.swift
+//  FavouritesCampaignsView.swift
 //  AWorldAction
 //
-//  Created by Andrea Sala on 03/06/23.
+//  Created by Andrea Sala on 05/06/23.
 //
 
 import SwiftUI
 
-struct InprogressCampaignsView: View {
+struct FavouritesCampaignsView: View {
     @EnvironmentObject var appSettings: AppSettings
-    @StateObject var campaignList = CampaignListModel(toShow: "inprogress")
+    @StateObject var campaignList = CampaignListModel(toShow: "favourites")
     
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Campagne in corso")
+                Text("Preferiti")
                     .font(.title)
                     .foregroundColor(Color.white)
                     .padding(.bottom)
@@ -41,5 +41,11 @@ struct InprogressCampaignsView: View {
                 }
             }
         }
+    }
+}
+
+struct FavouritesCampaignsView_Previews: PreviewProvider {
+    static var previews: some View {
+        FavouritesCampaignsView()
     }
 }

@@ -8,14 +8,19 @@
 import Foundation
 import Alamofire
 
-public class CampaignsModel: ObservableObject {
+public class CampaignListModel: ObservableObject {
+    var toShow: String
     @Published var campaignList: [Campaign] = []
     @Published var loading = false
     @Published var failed = false
     @Published var statusCode: Int?
     
+    init(toShow: String) {
+        self.toShow = toShow
+    }
+    
     func loadCampaigns(appSettings: AppSettings) {
-        let url = apiUrl + "/campaigns"
+        let url = apiUrl + "/" + toShow
         let headers: HTTPHeaders = [
             .authorization(bearerToken: appSettings.usrToken),
             .accept("application/json")
@@ -27,7 +32,7 @@ public class CampaignsModel: ObservableObject {
             .responseDecodable(of: CampaignCollection.self) { response in
                 switch response.result {
                     case .success(let responseData):
-                    if response.response?.statusCode == 401 {
+                    if response.response?.statusCode != 200 {
                         self.failed = true
                     }
                     

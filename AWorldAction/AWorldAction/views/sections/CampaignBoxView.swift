@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct CampaignBoxView: View {
+    @EnvironmentObject var appSettings: AppSettings
     @State var campaign: Campaign
     
     var body: some View {
         VStack(spacing: 0) {
             AsyncImage(
-                url: URL(string: "https://via.placeholder.com/640x480.png/0044dd?text=animals+et"),
+                url: campaign.pictures?.first?.getUrl(),
                 content: {
                     image in image.resizable()
                         .aspectRatio(contentMode: .fill)
@@ -76,4 +78,6 @@ struct CampaignBoxView: View {
         .cornerRadius(12)
         .padding()
     }
+    
+    
 }
