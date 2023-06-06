@@ -18,12 +18,12 @@ struct ContentView: View {
                 if (appSettings.requestFailed) {
                     Image(systemName: "person.crop.circle.badge.exclamationmark.fill")
                         .imageScale(.large)
-                    Text("Impossibile verificare l'accesso")
+                    Text(StringComponents.tokenVerificationError)
                         .padding()
                     Button {
                         appSettings.checkAuth()
                     } label: {
-                        Text("Riprova")
+                        Text(StringComponents.retryBtn)
                     }
                 } else {
                     HomeView()

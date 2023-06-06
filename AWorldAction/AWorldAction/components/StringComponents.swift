@@ -31,4 +31,8 @@ struct StringComponents {
     private(set) static var accountStep2 = "Crea una password sicura"
     private(set) static var accountStep3 = "Inserisci una foto profilo"
     
+    private(set) static var tokenVerificationError = "Impossibile verificare l'accesso"
+    private(set) static var campaignListFetchError = "Impossibile recuperare la lista delle campagne"
+    private(set) static var retryBtn = "Riprova"
+    
 }

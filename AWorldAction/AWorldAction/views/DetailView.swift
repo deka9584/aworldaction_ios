@@ -90,11 +90,17 @@ struct DetailView: View {
                         if (campaignModel.campaign?.completed == 1) {
                             Image(systemName: "checkmark.square.fill")
                                 .imageScale(.large)
+                                .foregroundColor(ColorComponents.green)
                             Text("Completata")
+                                .bold()
+                                .foregroundColor(ColorComponents.green)
                         } else {
                             Image(systemName: "hourglass")
                                 .imageScale(.large)
+                                .foregroundColor(Color.orange)
                             Text("In corso")
+                                .bold()
+                                .foregroundColor(Color.orange)
                         }
                     }
                     .padding()

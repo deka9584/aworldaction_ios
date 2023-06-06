@@ -27,26 +27,24 @@ public class CampaignListModel: ObservableObject {
         ]
         
         loading = true
+        campaignList.removeAll()
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: CampaignCollection.self) { response in
                 switch response.result {
-                    case .success(let responseData):
-                    if response.response?.statusCode != 200 {
-                        self.failed = true
-                    }
                     
-                    if let data = responseData.data {
-                        self.campaignList = data
-                    }
+                case .success(let responseData):
+                    self.failed = response.response?.statusCode != 200
                     
                     if let message = responseData.message {
                         print(message)
                     }
                     
-                    self.failed = false
+                    responseData.data?.forEach({ campaign in
+                        self.campaignList.append(campaign)
+                    })
                     
-                    case .failure(let error):
+                case .failure(let error):
                     self.failed = true
                     print(error)
                 }

@@ -13,26 +13,31 @@ struct CompletedCampaignsView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text("Campagne completate")
-                    .font(.title)
-                    .foregroundColor(Color.white)
-                    .padding(.bottom)
-            }
-            .frame(maxWidth: .infinity)
-            .background(ColorComponents.lightGreen)
-            
-            ScrollView {
-                ForEach(cListModel.campaignList) {
-                    campaign in
-                    CampaignBoxView(campaign: campaign)
+            NavigationView {
+                ScrollView {
+                    if (cListModel.failed) {
+                        Text(StringComponents.campaignListFetchError)
+                        
+                        Button {
+                            refresh()
+                        } label: {
+                            Text(StringComponents.retryBtn)
+                        }
+                    } else {
+                        ForEach(cListModel.campaignList) {
+                            campaign in
+                            CampaignBoxView(campaign: campaign)
+                        }
+                    }
+                }
+                .navigationTitle("Campagne completate")
+                .refreshable {
+                    refresh()
                 }
             }
-            
-            Spacer()
         }
         .onAppear() {
-            cListModel.loadCampaigns(appSettings: appSettings)
+            refresh()
         }
         .overlay() {
             if (cListModel.loading) {
@@ -41,6 +46,10 @@ struct CompletedCampaignsView: View {
                 }
             }
         }
+    }
+    
+    func refresh() {
+        cListModel.loadCampaigns(appSettings: appSettings)
     }
 }
 

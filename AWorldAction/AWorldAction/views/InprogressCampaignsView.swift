@@ -15,19 +15,29 @@ struct InprogressCampaignsView: View {
         VStack(spacing: 0) {
             NavigationView {
                 ScrollView {
-                    ForEach(cListModel.campaignList) {
-                        campaign in
-                        CampaignBoxView(campaign: campaign)
+                    if (cListModel.failed) {
+                        Text(StringComponents.campaignListFetchError)
+                        
+                        Button {
+                            refresh()
+                        } label: {
+                            Text(StringComponents.retryBtn)
+                        }
+                    } else {
+                        ForEach(cListModel.campaignList) {
+                            campaign in
+                            CampaignBoxView(campaign: campaign)
+                        }
                     }
                 }
                 .navigationTitle("Campagne in corso")
                 .refreshable {
-                    cListModel.loadCampaigns(appSettings: appSettings)
+                    refresh()
                 }
             }
         }
         .onAppear() {
-            cListModel.loadCampaigns(appSettings: appSettings)
+            refresh()
         }
         .overlay() {
             if (cListModel.loading) {
@@ -36,5 +46,9 @@ struct InprogressCampaignsView: View {
                 }
             }
         }
+    }
+    
+    func refresh() {
+        cListModel.loadCampaigns(appSettings: appSettings)
     }
 }

@@ -13,26 +13,31 @@ struct FavouritesCampaignsView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text("Preferiti")
-                    .font(.title)
-                    .foregroundColor(Color.white)
-                    .padding(.bottom)
-            }
-            .frame(maxWidth: .infinity)
-            .background(ColorComponents.lightGreen)
-            
-            ScrollView {
-                ForEach(cListModel.campaignList) {
-                    campaign in
-                    CampaignBoxView(campaign: campaign)
+            NavigationView {
+                ScrollView {
+                    if (cListModel.failed) {
+                        Text(StringComponents.campaignListFetchError)
+                        
+                        Button {
+                            refresh()
+                        } label: {
+                            Text(StringComponents.retryBtn)
+                        }
+                    } else {
+                        ForEach(cListModel.campaignList) {
+                            campaign in
+                            CampaignBoxView(campaign: campaign)
+                        }
+                    }
+                }
+                .navigationTitle("Preferiti")
+                .refreshable {
+                    refresh()
                 }
             }
-            
-            Spacer()
         }
         .onAppear() {
-            cListModel.loadCampaigns(appSettings: appSettings)
+            refresh()
         }
         .overlay() {
             if (cListModel.loading) {
@@ -41,6 +46,10 @@ struct FavouritesCampaignsView: View {
                 }
             }
         }
+    }
+    
+    func refresh() {
+        cListModel.loadCampaigns(appSettings: appSettings)
     }
 }
 
