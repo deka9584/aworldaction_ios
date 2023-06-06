@@ -21,11 +21,21 @@ struct CampaignBoxView: View {
                         .aspectRatio(contentMode: .fill)
                 },
                 placeholder: {
-                    ProgressView()
+                    if (campaign.pictures?.isEmpty == true) {
+                        Image(systemName: "photo")
+                            .imageScale(.large)
+                        Text("Ancora nessuna immagine")
+                            .padding()
+                    } else {
+                        ProgressView()
+                    }
                 }
             )
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300)
+            .background(Color.gray)
+            .foregroundColor(Color.white)
             .clipped()
+            
             HStack {
                 Text(campaign.name)
                     .font(.title2)
@@ -36,23 +46,23 @@ struct CampaignBoxView: View {
             .padding()
             .background(ColorComponents.green)
             .cornerRadius(24, corners: [.bottomRight])
+            
             HStack {
                 Text(campaign.description)
                     .foregroundColor(Color.white)
                 Spacer()
             }
             .padding()
+            
             HStack {
-                Button {
-                    //
-                } label: {
-                    Text("Maggiori informazioni")
-                        .padding(10)
-                        .foregroundColor(Color.white)
-                        .background(ColorComponents.green)
-                        .cornerRadius(12)
-                }
+                NavigationLink("Maggiori informazioni", destination: DetailView(campaignId: campaign.id))
+                    .padding(10)
+                    .foregroundColor(Color.white)
+                    .background(ColorComponents.green)
+                    .cornerRadius(12)
+                
                 Spacer()
+                
                 Button {
                     //
                 } label: {
@@ -62,6 +72,7 @@ struct CampaignBoxView: View {
                         .background(ColorComponents.green)
                         .cornerRadius(12)
                 }
+                
                 Button {
                     //
                 } label: {

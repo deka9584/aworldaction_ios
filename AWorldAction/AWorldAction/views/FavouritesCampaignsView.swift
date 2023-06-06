@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FavouritesCampaignsView: View {
     @EnvironmentObject var appSettings: AppSettings
-    @StateObject var campaignList = CampaignListModel(toShow: "favourites")
+    @StateObject var cListModel = CampaignListModel(toShow: "favourites")
     
     var body: some View {
         VStack(spacing: 0) {
@@ -23,7 +23,7 @@ struct FavouritesCampaignsView: View {
             .background(ColorComponents.lightGreen)
             
             ScrollView {
-                ForEach(campaignList.campaignList) {
+                ForEach(cListModel.campaignList) {
                     campaign in
                     CampaignBoxView(campaign: campaign)
                 }
@@ -32,10 +32,10 @@ struct FavouritesCampaignsView: View {
             Spacer()
         }
         .onAppear() {
-            campaignList.loadCampaigns(appSettings: appSettings)
+            cListModel.loadCampaigns(appSettings: appSettings)
         }
         .overlay() {
-            if (campaignList.loading) {
+            if (cListModel.loading) {
                 VStack {
                     ProgressView()
                 }

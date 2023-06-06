@@ -25,7 +25,7 @@ struct Campaign: Codable, Identifiable {
     let updated_at: String
 }
 
-struct CampaignPictures: Codable {
+struct CampaignPictures: Codable, Identifiable {
     let id: Int
     let path: String
     let caption: String
