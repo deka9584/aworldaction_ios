@@ -35,4 +35,9 @@ struct StringComponents {
     private(set) static var campaignListFetchError = "Impossibile recuperare la lista delle campagne"
     private(set) static var retryBtn = "Riprova"
     
+    private(set) static var campaignListEmpty = "Nessuna campagna trovata"
+    private(set) static var favouritesEmpty = "Non hai ancora nessun preferito"
+    private(set) static var statusInprogress = "In corso"
+    private(set) static var statusCompleted = "Completata"
+    
 }

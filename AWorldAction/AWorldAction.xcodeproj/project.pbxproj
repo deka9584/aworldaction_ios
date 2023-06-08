@@ -28,6 +28,7 @@
 		EAC7BF1629EDAD3B001650E7 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7BF1529EDAD3B001650E7 /* RegisterView.swift */; };
 		EAC7BF1829EDAD8D001650E7 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7BF1729EDAD8D001650E7 /* RegisterModel.swift */; };
 		EAC7BF1C29EDB90C001650E7 /* Register2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7BF1B29EDB90C001650E7 /* Register2View.swift */; };
+		EADACEB92A31D7C000EC19D6 /* FetchCampaignsErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADACEB82A31D7C000EC19D6 /* FetchCampaignsErrorView.swift */; };
 		EAE244E22A039EEF00D03599 /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE244E12A039EEF00D03599 /* WelcomeModel.swift */; };
 		EAE244E52A03A13300D03599 /* ColorComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE244E42A03A13300D03599 /* ColorComponents.swift */; };
 		EAE244EA2A03AC1E00D03599 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE244E92A03AC1E00D03599 /* AppSettings.swift */; };
@@ -59,6 +60,7 @@
 		EAC7BF1529EDAD3B001650E7 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		EAC7BF1729EDAD8D001650E7 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		EAC7BF1B29EDB90C001650E7 /* Register2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register2View.swift; sourceTree = "<group>"; };
+		EADACEB82A31D7C000EC19D6 /* FetchCampaignsErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCampaignsErrorView.swift; sourceTree = "<group>"; };
 		EAE244E12A039EEF00D03599 /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
 		EAE244E42A03A13300D03599 /* ColorComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorComponents.swift; sourceTree = "<group>"; };
 		EAE244E92A03AC1E00D03599 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				EA5475212A2B91FF00EA5210 /* CampaignBoxView.swift */,
+				EADACEB82A31D7C000EC19D6 /* FetchCampaignsErrorView.swift */,
 			);
 			path = sections;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				EA54751D2A2B749500EA5210 /* InprogressCampaignsView.swift in Sources */,
 				EA76FD192A2CE76200A35B95 /* AccountView.swift in Sources */,
 				EAB3765D29E060BB003899BA /* LoginModel.swift in Sources */,
+				EADACEB92A31D7C000EC19D6 /* FetchCampaignsErrorView.swift in Sources */,
 				EA76FD1C2A2D006000A35B95 /* RoundedCorner.swift in Sources */,
 				EA5475192A2B737900EA5210 /* HomeView.swift in Sources */,
 				EA6019152A2FA15900EF337F /* DetailView.swift in Sources */,

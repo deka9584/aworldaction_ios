@@ -15,19 +15,22 @@ struct CompletedCampaignsView: View {
         VStack(spacing: 0) {
             NavigationView {
                 ScrollView {
-                    if (cListModel.failed) {
-                        Text(StringComponents.campaignListFetchError)
-                        
-                        Button {
-                            refresh()
-                        } label: {
-                            Text(StringComponents.retryBtn)
-                        }
-                    } else {
+                    if (!cListModel.campaignList.isEmpty) {
                         ForEach(cListModel.campaignList) {
                             campaign in
                             CampaignBoxView(campaign: campaign)
                         }
+                    } else if (cListModel.loading) {
+                        ProgressView()
+                            .padding()
+                    } else if (cListModel.failed) {
+                        FetchCampaignsErrorView()
+                            .onTapGesture {
+                                refresh()
+                            }
+                    } else {
+                        Text(StringComponents.campaignListEmpty)
+                            .padding(.top)
                     }
                 }
                 .navigationTitle("Campagne completate")
@@ -38,13 +41,6 @@ struct CompletedCampaignsView: View {
         }
         .onAppear() {
             refresh()
-        }
-        .overlay() {
-            if (cListModel.loading) {
-                VStack {
-                    ProgressView()
-                }
-            }
         }
     }
     

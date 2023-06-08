@@ -91,14 +91,14 @@ struct DetailView: View {
                             Image(systemName: "checkmark.square.fill")
                                 .imageScale(.large)
                                 .foregroundColor(ColorComponents.green)
-                            Text("Completata")
+                            Text(StringComponents.statusCompleted)
                                 .bold()
                                 .foregroundColor(ColorComponents.green)
                         } else {
                             Image(systemName: "hourglass")
                                 .imageScale(.large)
                                 .foregroundColor(Color.orange)
-                            Text("In corso")
+                            Text(StringComponents.statusInprogress)
                                 .bold()
                                 .foregroundColor(Color.orange)
                         }
