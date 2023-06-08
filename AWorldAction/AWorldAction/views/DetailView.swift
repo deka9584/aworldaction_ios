@@ -109,6 +109,28 @@ struct DetailView: View {
                 .background(ColorComponents.lightGray)
                 .cornerRadius(12)
                 .padding()
+                
+                Text("Partecipanti")
+                    .font(.title2)
+                    .padding(.top)
+                
+                VStack(spacing: 20) {
+                    ForEach (campaignModel.contributors) {
+                        contributor in
+                        HStack {
+                            UserPictureView(path: contributor.picture_path, size: 40)
+                            Text(contributor.name)
+                                .padding()
+                            Text(campaignModel.campaign?.creator_id?.contains(contributor.id) ?? false ? "Creatore" : "Contributore")
+                                .textCase(.uppercase)
+                                .font(.caption)
+                        }
+                        .padding()
+                        .background(ColorComponents.lightGray)
+                        .cornerRadius(12)
+                    }
+                }
+                .padding()
             }
         }
         .onAppear() {

@@ -65,4 +65,10 @@ public class AppSettings: ObservableObject {
                 }
             }
     }
+    
+    func getStorageUrl(path: String) -> URL? {
+        let serverUrl = apiUrl.replacingOccurrences(of: "api", with: "storage")
+        let newUrl = path.replacingOccurrences(of: "public", with: serverUrl)
+        return URL(string: newUrl)
+    }
 }

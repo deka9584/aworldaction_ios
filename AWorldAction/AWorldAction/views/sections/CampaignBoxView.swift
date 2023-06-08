@@ -15,7 +15,7 @@ struct CampaignBoxView: View {
     var body: some View {
         VStack(spacing: 0) {
             AsyncImage(
-                url: campaign.pictures?.first?.getUrl(),
+                url: appSettings.getStorageUrl(path: campaign.pictures?.first?.path ?? ""),
                 content: {
                     image in image.resizable()
                         .aspectRatio(contentMode: .fill)

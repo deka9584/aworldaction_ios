@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA0B43F42A3243C500EC3923 /* UserPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0B43F32A3243C500EC3923 /* UserPictureView.swift */; };
 		EA19598729DEDD6B006E1D5A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA19598629DEDD6B006E1D5A /* LoginView.swift */; };
 		EA19598929DF51F9006E1D5A /* StringComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA19598829DF51F9006E1D5A /* StringComponents.swift */; };
 		EA5475192A2B737900EA5210 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5475182A2B737900EA5210 /* HomeView.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA0B43F32A3243C500EC3923 /* UserPictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPictureView.swift; sourceTree = "<group>"; };
 		EA19598629DEDD6B006E1D5A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		EA19598829DF51F9006E1D5A /* StringComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringComponents.swift; sourceTree = "<group>"; };
 		EA5475182A2B737900EA5210 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				EA5475212A2B91FF00EA5210 /* CampaignBoxView.swift */,
 				EADACEB82A31D7C000EC19D6 /* FetchCampaignsErrorView.swift */,
+				EA0B43F32A3243C500EC3923 /* UserPictureView.swift */,
 			);
 			path = sections;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				EAC7BF1829EDAD8D001650E7 /* RegisterModel.swift in Sources */,
 				EA6019172A2FA53C00EF337F /* CampaignModel.swift in Sources */,
 				EA76FD242A2DDC5300A35B95 /* FavouritesCampaignsView.swift in Sources */,
+				EA0B43F42A3243C500EC3923 /* UserPictureView.swift in Sources */,
 				EA76FD172A2CA87F00A35B95 /* Campaign.swift in Sources */,
 				EA19598929DF51F9006E1D5A /* StringComponents.swift in Sources */,
 				EA76FD1E2A2D00ED00A35B95 /* UserProfile.swift in Sources */,

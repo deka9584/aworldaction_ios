@@ -11,6 +11,7 @@ import Alamofire
 public class CampaignModel: ObservableObject {
     @Published var campaign: Campaign?
     @Published var pictures: [CampaignPictures] = []
+    @Published var contributors: [UserProfile] = []
     @Published var loading = false
     
     func fetch(appSettings: AppSettings, campaignId: Int) {
@@ -27,11 +28,13 @@ public class CampaignModel: ObservableObject {
                 switch response.result {
                     
                 case .success(let responseData):
-                    print(responseData)
-                    
                     if let data = responseData["data"] {
                         data.pictures?.forEach({ picture in
                             self.pictures.append(picture)
+                        })
+                        
+                        data.contributors?.forEach({ contributor in
+                            self.contributors.append(contributor)
                         })
                         
                         self.campaign = data

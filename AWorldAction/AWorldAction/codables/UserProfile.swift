@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct UserProfile {
+struct UserProfile: Codable, Identifiable {
     let id: Int
     let name: String
-    let picture_path: String
-    let role_id: String
-    let created_at: String
+    let picture_path: String?
+    let role_id: String?
+    let created_at: String?
 }
