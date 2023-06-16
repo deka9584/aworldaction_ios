@@ -11,6 +11,8 @@ import Alamofire
 struct CampaignBoxView: View {
     @EnvironmentObject var appSettings: AppSettings
     @State var campaign: Campaign
+    @State var related = false
+    @State var creator = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -63,14 +65,29 @@ struct CampaignBoxView: View {
                 
                 Spacer()
                 
-                Button {
-                    //
-                } label: {
-                    Image(systemName: "star")
+                if (creator) {
+                    Image(systemName: (campaign.completed == 1) ? "heart.fill" : "heart")
                         .padding(10)
                         .foregroundColor(Color.white)
                         .background(ColorComponents.green)
                         .cornerRadius(12)
+                } else if (campaign.completed == 1) {
+                    Image(systemName: related ? "heart.fill" : "checkmark")
+                        .padding(10)
+                        .foregroundColor(Color.white)
+                        .background(ColorComponents.green)
+                        .cornerRadius(12)
+                } else {
+                    Button {
+                        appSettings.relateCampaign(campaignId: campaign.id)
+                        related.toggle()
+                    } label: {
+                        Image(systemName: related ? "star.fill" : "star")
+                            .padding(10)
+                            .foregroundColor(Color.white)
+                            .background(ColorComponents.green)
+                            .cornerRadius(12)
+                    }
                 }
                 
                 Button {
@@ -88,6 +105,10 @@ struct CampaignBoxView: View {
         .background(ColorComponents.lightGreen)
         .cornerRadius(12)
         .padding()
+        .onAppear() {
+            related = (campaign.contributors?.contains { $0.id == appSettings.user?.id }) ?? false
+            creator = (campaign.creator_id?.contains(appSettings.user?.id ?? 0)) ?? false
+        }
     }
     
     

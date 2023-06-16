@@ -23,6 +23,7 @@
 		EA76FD222A2DD97400A35B95 /* CompletedCampaignsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD212A2DD97400A35B95 /* CompletedCampaignsView.swift */; };
 		EA76FD242A2DDC5300A35B95 /* FavouritesCampaignsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD232A2DDC5300A35B95 /* FavouritesCampaignsView.swift */; };
 		EA77776C2A176A490006F68F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EA77776B2A176A490006F68F /* Alamofire */; };
+		EA9404F62A33BBBB00BD852D /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9404F52A33BBBB00BD852D /* Comment.swift */; };
 		EA9625FA2A1773AE00D792A4 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9625F92A1773AE00D792A4 /* AuthResponse.swift */; };
 		EA9625FF2A177C8700D792A4 /* LoggedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9625FE2A177C8700D792A4 /* LoggedUser.swift */; };
 		EAB3765D29E060BB003899BA /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB3765C29E060BB003899BA /* LoginModel.swift */; };
@@ -56,6 +57,7 @@
 		EA76FD1D2A2D00ED00A35B95 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		EA76FD212A2DD97400A35B95 /* CompletedCampaignsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedCampaignsView.swift; sourceTree = "<group>"; };
 		EA76FD232A2DDC5300A35B95 /* FavouritesCampaignsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCampaignsView.swift; sourceTree = "<group>"; };
+		EA9404F52A33BBBB00BD852D /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		EA9625F92A1773AE00D792A4 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		EA9625FE2A177C8700D792A4 /* LoggedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedUser.swift; sourceTree = "<group>"; };
 		EAB3765C29E060BB003899BA /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				EA9625F92A1773AE00D792A4 /* AuthResponse.swift */,
 				EA76FD162A2CA87F00A35B95 /* Campaign.swift */,
 				EA76FD1D2A2D00ED00A35B95 /* UserProfile.swift */,
+				EA9404F52A33BBBB00BD852D /* Comment.swift */,
 			);
 			path = codables;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				EA5475192A2B737900EA5210 /* HomeView.swift in Sources */,
 				EA6019152A2FA15900EF337F /* DetailView.swift in Sources */,
 				FF2E1EA329D6E2DD0033072D /* WelcomeView.swift in Sources */,
+				EA9404F62A33BBBB00BD852D /* Comment.swift in Sources */,
 				EA9625FF2A177C8700D792A4 /* LoggedUser.swift in Sources */,
 				EAC7BF1629EDAD3B001650E7 /* RegisterView.swift in Sources */,
 				EA9625FA2A1773AE00D792A4 /* AuthResponse.swift in Sources */,

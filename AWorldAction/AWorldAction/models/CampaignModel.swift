@@ -12,12 +12,13 @@ public class CampaignModel: ObservableObject {
     @Published var campaign: Campaign?
     @Published var pictures: [CampaignPictures] = []
     @Published var contributors: [UserProfile] = []
+    @Published var comments: [Comment] = []
     @Published var loading = false
     
-    func fetch(appSettings: AppSettings, campaignId: Int) {
+    func fetch(usrToken: String, campaignId: Int) {
         let url = apiUrl + "/campaigns/" + String(campaignId)
         let headers: HTTPHeaders = [
-            .authorization(bearerToken: appSettings.usrToken),
+            .authorization(bearerToken: usrToken),
             .accept("application/json")
         ]
         
@@ -39,6 +40,30 @@ public class CampaignModel: ObservableObject {
                         
                         self.campaign = data
                     }
+                    
+                case .failure(let error):
+                    print(error)
+                }
+                
+                self.loading = false
+            }
+        
+        loadComments(headers: headers, campaignId: campaignId)
+    }
+    
+    func loadComments(headers: HTTPHeaders, campaignId: Int) {
+        let url = apiUrl + "/comments/filter/" + String(campaignId)
+        
+        comments.removeAll()
+        
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: CommentCollection.self) { response in
+                switch response.result {
+                    
+                case .success(let responseData):
+                    responseData.data?.forEach({ comment in
+                        self.comments.append(comment)
+                    })
                     
                 case .failure(let error):
                     print(error)

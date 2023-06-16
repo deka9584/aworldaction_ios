@@ -42,8 +42,6 @@ public class LoginModel: ObservableObject {
                         appSettings.user = user
                     }
                     
-                    print(response.response?.statusCode)
-                    
                     case .failure(let error):
                     print(error)
                     self.status = StringComponents.loginError

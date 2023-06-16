@@ -55,13 +55,34 @@ public class AppSettings: ObservableObject {
         AF.request(url, method: .post, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: AuthResponse.self) { response in
                 switch response.result {
-                    case .success(let responseData):
+                case .success(let responseData):
                     self.usrToken = ""
                     print(responseData)
-                    
-                    case .failure(let error):
+                case .failure(let error):
                     self.requestFailed = true
                     print(error)
+                }
+            }
+    }
+    
+    func relateCampaign(campaignId: Int) {
+        let url = apiUrl + "/relate-campaign/logged"
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        let body = [
+            "campaign_id": campaignId
+        ]
+        
+        AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: [String: String].self) { response in
+                switch response.result {
+                case .success(let responseData):
+                    print(responseData)
+                case .failure(let error):
+                    print(error)
+                    
                 }
             }
     }

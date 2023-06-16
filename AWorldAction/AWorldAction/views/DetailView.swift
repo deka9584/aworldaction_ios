@@ -11,6 +11,7 @@ struct DetailView: View {
     let campaignId: Int
     @EnvironmentObject var appSettings: AppSettings
     @StateObject var campaignModel = CampaignModel()
+    @State private var userComment = ""
     
     var body: some View {
         VStack {
@@ -131,11 +132,57 @@ struct DetailView: View {
                     }
                 }
                 .padding()
+                
+                Text("Commenti")
+                    .font(.title2)
+                    .padding(.top)
+                
+                HStack {
+                    UserPictureView(path: appSettings.user?.picure_path, size: 40)
+                        .padding()
+                    VStack(alignment: .leading) {
+                        TextField("Il tuo commento", text: $userComment)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        Button {
+                            
+                        } label: {
+                            Text("Commenta")
+                                .frame(maxWidth: .infinity, minHeight: 40)
+                                .background(ColorComponents.lightGreen)
+                                .foregroundColor(Color.white)
+                                .cornerRadius(12)
+                        }
+                    }
+                }
+                .padding()
+                .background(ColorComponents.lightGray)
+                .cornerRadius(12)
+                .padding()
+                
+                VStack(alignment: .center, spacing: 20) {
+                    ForEach (campaignModel.comments) {
+                        comment in
+                        HStack {
+                            UserPictureView(path: comment.picture_path, size: 40)
+                            VStack {
+                                Text(comment.user_name)
+                                    .padding(1)
+                                Text(comment.body)
+                                    .font(.caption)
+                                    .padding(1)
+                            }
+                            .padding(.horizontal)
+                        }
+                        .padding()
+                        .background(ColorComponents.lightGray)
+                        .cornerRadius(12)
+                    }
+                }
             }
         }
         .onAppear() {
             if (campaignId != 0) {
-                campaignModel.fetch(appSettings: appSettings, campaignId: campaignId)
+                campaignModel.fetch(usrToken: appSettings.usrToken, campaignId: campaignId)
             }
         }
         .overlay() {
