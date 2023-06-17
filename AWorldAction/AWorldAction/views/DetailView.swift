@@ -12,6 +12,7 @@ struct DetailView: View {
     @EnvironmentObject var appSettings: AppSettings
     @StateObject var campaignModel = CampaignModel()
     @State private var userComment = ""
+    @State var deleteCommentConfirm: Bool = false
     
     var body: some View {
         VStack {
@@ -144,7 +145,8 @@ struct DetailView: View {
                         TextField("Il tuo commento", text: $userComment)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         Button {
-                            
+                            campaignModel.insertComment(usrToken: appSettings.usrToken, campaignId: campaignId, body: userComment)
+                            userComment = ""
                         } label: {
                             Text("Commenta")
                                 .frame(maxWidth: .infinity, minHeight: 40)
@@ -172,6 +174,20 @@ struct DetailView: View {
                                     .padding(1)
                             }
                             .padding(.horizontal)
+                            
+                            if (appSettings.user?.id == comment.user_id) {
+                                Button {
+                                    deleteCommentConfirm = true
+                                } label: {
+                                    Image(systemName: "trash.fill")
+                                        .foregroundColor(Color.red)
+                                }
+                                .confirmationDialog("Vuoi eliminare il comment", isPresented: $deleteCommentConfirm) {
+                                    Button("Elimina", role: .destructive) {
+                                        campaignModel.deleteComment(usrToken: appSettings.usrToken, comment: comment)
+                                    }
+                                }
+                            }
                         }
                         .padding()
                         .background(ColorComponents.lightGray)

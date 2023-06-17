@@ -12,6 +12,11 @@ struct CommentCollection: Codable {
     let message: String?
 }
 
+struct CommentResponse: Codable {
+    let message: String?
+    let comment: Comment?
+}
+
 struct Comment: Codable, Identifiable {
     let id: Int
     let body: String

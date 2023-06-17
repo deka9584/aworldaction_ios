@@ -51,6 +51,7 @@ struct RegisterView: View {
                 
                 TextField(StringComponents.emailHint, text: $registerModel.emailField)
                     .textContentType(.emailAddress)
+                    .keyboardType(.emailAddress)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
                     .background(ColorComponents.lightGray)

@@ -68,8 +68,58 @@ public class CampaignModel: ObservableObject {
                 case .failure(let error):
                     print(error)
                 }
-                
-                self.loading = false
+            }
+    }
+    
+    func insertComment(usrToken: String, campaignId: Int, body: String) {
+        let url = apiUrl + "/comments"
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        let body: [String: Any] = [
+            "campaign_id": campaignId,
+            "body": body
+        ]
+        
+        AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: CommentResponse.self) { response in
+                switch response.result {
+                    
+                case .success(let responseData):
+                    if let comment = responseData.comment {
+                        self.loadComments(headers: headers, campaignId: campaignId)
+                    }
+                    
+                    print(responseData)
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    func deleteComment(usrToken: String, comment: Comment) {
+        let url = apiUrl + "/comments/" + String(comment.id)
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        
+        AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: CommentResponse.self) { response in
+                switch response.result {
+                    
+                case .success(let responseData):
+                    if response.response?.statusCode == 200 {
+                        self.loadComments(headers: headers, campaignId: comment.campaign_id)
+                    }
+                    
+                    print(responseData)
+                    
+                case .failure(let error):
+                    print(error)
+                }
             }
     }
 }

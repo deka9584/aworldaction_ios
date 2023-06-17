@@ -40,6 +40,7 @@ struct LoginView: View {
             VStack {
                 TextField(StringComponents.loginUserHint, text: $loginModel.emailField)
                     .textContentType(.emailAddress)
+                    .keyboardType(.emailAddress)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
                     .background(ColorComponents.lightGray)

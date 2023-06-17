@@ -42,7 +42,7 @@ public class RegisterModel: ObservableObject {
                 switch response.result {
                     case .success(let responseData):
                     if response.response?.statusCode != 200 {
-                        self.status = responseData.message ?? "Error"
+                        self.status = responseData.message ?? ""
                     }
                     
                     if let token = responseData.token {
