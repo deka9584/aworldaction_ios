@@ -13,7 +13,7 @@ struct LoggedUser: Codable {
     let email_verified_at: String?
     let id: Int
     let name: String
-    let picure_path: String?
+    let picture_path: String?
     let role_id: Int
-    let updated_at: String?
+    let updated_at: String
 }

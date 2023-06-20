@@ -77,18 +77,18 @@ public class CampaignModel: ObservableObject {
             .authorization(bearerToken: usrToken),
             .accept("application/json")
         ]
-        let body: [String: Any] = [
+        let parameters: [String: Any] = [
             "campaign_id": campaignId,
             "body": body
         ]
         
-        AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers)
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: CommentResponse.self) { response in
                 switch response.result {
                     
                 case .success(let responseData):
                     if let comment = responseData.comment {
-                        self.loadComments(headers: headers, campaignId: campaignId)
+                        self.comments.append(comment)
                     }
                     
                     print(responseData)
@@ -99,8 +99,8 @@ public class CampaignModel: ObservableObject {
             }
     }
     
-    func deleteComment(usrToken: String, comment: Comment) {
-        let url = apiUrl + "/comments/" + String(comment.id)
+    func deleteComment(usrToken: String, commentId: Int) {
+        let url = apiUrl + "/comments/" + String(commentId)
         let headers: HTTPHeaders = [
             .authorization(bearerToken: usrToken),
             .accept("application/json")
@@ -112,12 +112,43 @@ public class CampaignModel: ObservableObject {
                     
                 case .success(let responseData):
                     if response.response?.statusCode == 200 {
-                        self.loadComments(headers: headers, campaignId: comment.campaign_id)
+                        self.comments.removeAll { $0.id == commentId }
                     }
                     
                     print(responseData)
                     
                 case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    func editComment(usrToken: String, commentId: Int, body: String) {
+        let url = apiUrl + "/comments/" + String(commentId)
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        let parameters = [
+            "body": body
+        ]
+        
+        AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: CommentResponse.self) { response in
+                switch response.result {
+                case.success(let responseData):
+                    if let comment = responseData.comment {
+                        for (index, existingComment) in self.comments.enumerated() {
+                            if existingComment.id == comment.id {
+                                self.comments[index] = comment
+                                break
+                            }
+                        }
+                    }
+                    
+                    print(responseData)
+                    
+                case.failure(let error):
                     print(error)
                 }
             }

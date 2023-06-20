@@ -12,7 +12,9 @@ struct DetailView: View {
     @EnvironmentObject var appSettings: AppSettings
     @StateObject var campaignModel = CampaignModel()
     @State private var userComment = ""
-    @State var deleteCommentConfirm: Bool = false
+    @State var deleteCommentConfirm = false
+    @State var showEdit = false
+    @State var editingComment: Comment?
     
     var body: some View {
         VStack {
@@ -22,7 +24,7 @@ struct DetailView: View {
                     .padding()
                 
                 TabView {
-                    ForEach(campaignModel.pictures) {picture in
+                    ForEach(campaignModel.pictures) { picture in
                         AsyncImage(
                             url: picture.getUrl(),
                             content: {
@@ -30,21 +32,46 @@ struct DetailView: View {
                                     .aspectRatio(contentMode: .fill)
                                     .overlay() {
                                         VStack {
-                                            Text(picture.caption)
-                                                .font(.caption)
-                                                .padding(8)
-                                                .background(Color.black.opacity(0.6))
-                                                .foregroundColor(Color.white)
-                                                .cornerRadius(12)
-                                                .padding(.top)
+                                            VStack {
+                                                Text(picture.caption)
+                                                    .font(.caption)
+                                                    .foregroundColor(Color.white)
+                                                
+                                                Text(appSettings.formatDateString(dateString: picture.created_at))
+                                                    .font(.caption)
+                                                    .foregroundColor(Color.gray)
+                                                
+                                            }
+                                            .padding(8)
+                                            .background(Color.black.opacity(0.6))
+                                            .cornerRadius(12)
+                                            .padding(.top)
+                                            
                                             Spacer()
                                         }
+                                        .padding(1)
                                     }
                             },
                             placeholder: {
                                 ProgressView()
                             }
                         )
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        VStack {
+                            Image(systemName: "camera.circle.fill")
+                                .resizable()
+                                .frame(width: 60, height: 60)
+                                .padding()
+                                .foregroundColor(Color.white)
+                            
+                            Text("Pubblica un aggiornamento")
+                                .font(.title2)
+                                .foregroundColor(Color.white)
+                        }
                     }
                 }
                 .tabViewStyle(PageTabViewStyle())
@@ -139,7 +166,7 @@ struct DetailView: View {
                     .padding(.top)
                 
                 HStack {
-                    UserPictureView(path: appSettings.user?.picure_path, size: 40)
+                    UserPictureView(path: appSettings.user?.picture_path, size: 40)
                         .padding()
                     VStack(alignment: .leading) {
                         TextField("Il tuo commento", text: $userComment)
@@ -172,11 +199,27 @@ struct DetailView: View {
                                 Text(comment.body)
                                     .font(.caption)
                                     .padding(1)
+                                
+                                if (comment.created_at != comment.updated_at) {
+                                    Text("Modificato")
+                                        .font(.caption)
+                                        .foregroundColor(Color.gray)
+                                        .padding(1)
+                                }
                             }
                             .padding(.horizontal)
                             
                             if (appSettings.user?.id == comment.user_id) {
                                 Button {
+                                    editingComment = comment
+                                    showEdit = true
+                                } label: {
+                                    Image(systemName: "pencil")
+                                        .foregroundColor(Color.orange)
+                                }
+                                
+                                Button {
+                                    editingComment = comment
                                     deleteCommentConfirm = true
                                 } label: {
                                     Image(systemName: "trash.fill")
@@ -184,7 +227,10 @@ struct DetailView: View {
                                 }
                                 .confirmationDialog("Vuoi eliminare il comment", isPresented: $deleteCommentConfirm) {
                                     Button("Elimina", role: .destructive) {
-                                        campaignModel.deleteComment(usrToken: appSettings.usrToken, comment: comment)
+                                        if let commentId = editingComment?.id {
+                                            campaignModel.deleteComment(usrToken: appSettings.usrToken, commentId: commentId)
+                                            editingComment = nil
+                                        }
                                     }
                                 }
                             }
@@ -194,6 +240,7 @@ struct DetailView: View {
                         .cornerRadius(12)
                     }
                 }
+                .padding(.bottom)
             }
         }
         .onAppear() {
@@ -208,6 +255,9 @@ struct DetailView: View {
                 }
             }
         }
+        .fullScreenCover(isPresented: $showEdit, content: {
+            EditCommentView(campaignModel: campaignModel ,showEdit: $showEdit, editingComment: $editingComment)
+        })
     }
 }
 

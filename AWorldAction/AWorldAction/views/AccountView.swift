@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AccountView: View {
     @EnvironmentObject var appSettings: AppSettings
+    @StateObject var accountModel = AccountModel()
     @State var isPresentingConfirm: Bool = false
     
     var body: some View {
@@ -22,12 +23,11 @@ struct AccountView: View {
                         VStack(alignment: .leading) {
                             Text(appSettings.user?.name ?? "Utente")
                                 .font(.body)
-                            Text("Ruolo")
+                            Text(appSettings.getRoleName(roleId: appSettings.user?.role_id ?? 0))
                                 .font(.caption)
                                 .textCase(.uppercase)
                         }
                         .padding(.horizontal, 4)
-                        // Text(appSettings.user?.name ?? "Utente")
                         Spacer()
                     }
                     .padding()

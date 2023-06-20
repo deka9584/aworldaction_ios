@@ -92,4 +92,28 @@ public class AppSettings: ObservableObject {
         let newUrl = path.replacingOccurrences(of: "public", with: serverUrl)
         return URL(string: newUrl)
     }
+    
+    func formatDateString(dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
+        if let date = dateFormatter.date(from: dateString) {
+            dateFormatter.dateFormat = "dd MMM yyyy, HH:mm"
+            return dateFormatter.string(from: date)
+        }
+        
+        return ""
+    }
+    
+    func getRoleName(roleId: Int) -> String {
+        switch (roleId) {
+        case 1:
+            return StringComponents.userRole
+        case 2:
+            return StringComponents.adminRole
+        default:
+            return ""
+        }
+    }
+
 }

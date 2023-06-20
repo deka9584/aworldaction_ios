@@ -16,6 +16,8 @@ struct StringComponents {
     private(set) static var registerBtn = "Registrati"
     private(set) static var nextBtn = "Avanti"
     private(set) static var logoutBtn = "Disconnettiti"
+    private(set) static var userRole = "Utente"
+    private(set) static var adminRole = "Amministratore"
     
     private(set) static var loginUserHint = "E-Mail"
     private(set) static var loginError = "Errore durante l'autenticazione"
@@ -39,5 +41,6 @@ struct StringComponents {
     private(set) static var favouritesEmpty = "Non hai ancora nessun preferito"
     private(set) static var statusInprogress = "In corso"
     private(set) static var statusCompleted = "Completata"
+    private(set) static var editComment = "Modifica commento"
     
 }
