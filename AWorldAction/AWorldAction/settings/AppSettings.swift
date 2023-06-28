@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Alamofire
 
-let apiUrl = "http://127.0.0.1:8000/api"
+let apiUrl = "https://aworldaction.zapto.org/api"
 
 public class AppSettings: ObservableObject {
     @AppStorage("usrToken") var usrToken = ""

@@ -11,10 +11,11 @@ struct DetailView: View {
     let campaignId: Int
     @EnvironmentObject var appSettings: AppSettings
     @StateObject var campaignModel = CampaignModel()
-    @State private var userComment = ""
+    @State var userComment = ""
     @State var deleteCommentConfirm = false
     @State var showEdit = false
     @State var editingComment: Comment?
+    @State var showUpload = false
     
     var body: some View {
         VStack {
@@ -59,7 +60,7 @@ struct DetailView: View {
                     }
                     
                     Button {
-                        
+                        showUpload = true
                     } label: {
                         VStack {
                             Image(systemName: "camera.circle.fill")
@@ -255,6 +256,9 @@ struct DetailView: View {
                 }
             }
         }
+        .fullScreenCover(isPresented: $showUpload, content: {
+            UploadImageView(showUpload: $showUpload)
+        })
         .fullScreenCover(isPresented: $showEdit, content: {
             EditCommentView(campaignModel: campaignModel ,showEdit: $showEdit, editingComment: $editingComment)
         })

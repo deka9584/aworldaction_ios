@@ -12,6 +12,11 @@ struct CampaignCollection: Codable {
     let message: String?
 }
 
+struct CampaignResponse: Codable {
+    let message: String?
+    let campaign: Campaign?
+}
+
 struct Campaign: Codable, Identifiable {
     let id: Int
     let name: String
@@ -19,7 +24,7 @@ struct Campaign: Codable, Identifiable {
     let location_name: String?
     let location_lat: Double
     let location_lng: Double
-    let completed: Int
+    let completed: Int?
     let pictures: [CampaignPictures]?
     let contributors: [UserProfile]?
     let creator_id: [Int]?

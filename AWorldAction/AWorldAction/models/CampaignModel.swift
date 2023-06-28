@@ -25,20 +25,20 @@ public class CampaignModel: ObservableObject {
         loading = true
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers)
-            .responseDecodable(of: [String: Campaign].self) { response in
+            .responseDecodable(of: CampaignResponse.self) { response in
                 switch response.result {
                     
                 case .success(let responseData):
-                    if let data = responseData["data"] {
-                        data.pictures?.forEach({ picture in
+                    if let campaign = responseData.campaign {
+                        campaign.pictures?.forEach({ picture in
                             self.pictures.append(picture)
                         })
                         
-                        data.contributors?.forEach({ contributor in
+                        campaign.contributors?.forEach({ contributor in
                             self.contributors.append(contributor)
                         })
                         
-                        self.campaign = data
+                        self.campaign = campaign
                     }
                     
                 case .failure(let error):

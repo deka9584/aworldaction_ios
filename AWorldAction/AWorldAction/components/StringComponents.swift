@@ -42,5 +42,7 @@ struct StringComponents {
     private(set) static var statusInprogress = "In corso"
     private(set) static var statusCompleted = "Completata"
     private(set) static var editComment = "Modifica commento"
+    private(set) static var uploadImage = "Pubblica aggiornamento"
+    private(set) static var createCamlaign = "Crea campagna"
     
 }
