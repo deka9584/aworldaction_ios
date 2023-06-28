@@ -40,6 +40,8 @@ struct CreateCampaignView: View {
             .background(ColorComponents.lightGreen)
             
             if (createCampaignModel.success) {
+                Spacer()
+                
                 VStack {
                     Image(systemName: "checkmark.circle.fill")
                         .imageScale(.large)
@@ -59,6 +61,8 @@ struct CreateCampaignView: View {
                             .cornerRadius(12)
                     }
                 }
+                
+                Spacer()
             } else {
                 VStack {
                     Text("Titolo")

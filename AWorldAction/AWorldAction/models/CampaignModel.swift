@@ -29,7 +29,7 @@ public class CampaignModel: ObservableObject {
                 switch response.result {
                     
                 case .success(let responseData):
-                    if let campaign = responseData.campaign {
+                    if let campaign = responseData.data {
                         campaign.pictures?.forEach({ picture in
                             self.pictures.append(picture)
                         })

@@ -14,6 +14,7 @@ struct CampaignCollection: Codable {
 
 struct CampaignResponse: Codable {
     let message: String?
+    let data: Campaign?
     let campaign: Campaign?
 }
 

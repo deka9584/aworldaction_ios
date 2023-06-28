@@ -26,7 +26,8 @@ public class AppSettings: ObservableObject {
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: AuthResponse.self) { response in
                 switch response.result {
-                    case .success(let responseData):
+                    
+                case .success(let responseData):
                     if response.response?.statusCode != 200 {
                         self.usrToken = ""
                     }
@@ -38,7 +39,7 @@ public class AppSettings: ObservableObject {
                     self.requestFailed = false
                     print(responseData)
                     
-                    case .failure(let error):
+                case .failure(let error):
                     self.requestFailed = true
                     print(error)
                 }
@@ -55,9 +56,11 @@ public class AppSettings: ObservableObject {
         AF.request(url, method: .post, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: AuthResponse.self) { response in
                 switch response.result {
+                
                 case .success(let responseData):
                     self.usrToken = ""
                     print(responseData)
+                
                 case .failure(let error):
                     self.requestFailed = true
                     print(error)
@@ -78,11 +81,12 @@ public class AppSettings: ObservableObject {
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: [String: String].self) { response in
                 switch response.result {
+                
                 case .success(let responseData):
                     print(responseData)
+                
                 case .failure(let error):
                     print(error)
-                    
                 }
             }
     }

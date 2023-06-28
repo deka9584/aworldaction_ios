@@ -29,8 +29,9 @@ public class LoginModel: ObservableObject {
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: AuthResponse.self) { response in
                 switch response.result {
-                    case .success(let responseData):
-                    if response.response?.statusCode != 200 {
+                    
+                case .success(let responseData):
+                    if ([200, 201].contains(response.response?.statusCode)) {
                         self.status = responseData.message ?? "Error"
                     }
                     
@@ -42,7 +43,7 @@ public class LoginModel: ObservableObject {
                         appSettings.user = user
                     }
                     
-                    case .failure(let error):
+                case .failure(let error):
                     print(error)
                     self.status = StringComponents.loginError
                 }

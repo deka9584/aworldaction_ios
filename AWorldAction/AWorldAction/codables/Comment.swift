@@ -14,6 +14,7 @@ struct CommentCollection: Codable {
 
 struct CommentResponse: Codable {
     let message: String?
+    let data: Comment?
     let comment: Comment?
 }
 
