@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import CoreLocation
 
 public class DetailModel: ObservableObject {
     @Published var campaign: Campaign?

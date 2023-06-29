@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct DetailView: View {
     let campaignId: Int
@@ -82,13 +83,15 @@ struct DetailView: View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300)
                 .background(Color.gray)
                 
-                
-                
                 Text("Dettagli")
                     .font(.title2)
                     .padding(.top)
                 
                 VStack {
+                    MapView(coordinate: CLLocationCoordinate2D(latitude: detailModel.campaign?.location_lat ?? 0, longitude: detailModel.campaign?.location_lng ?? 0))
+                        .frame(width: .infinity, height: 240)
+                        .cornerRadius(12, corners: [.bottomRight, .bottomLeft])
+                    
                     Text("Località")
                         .font(.title3)
                         .foregroundColor(ColorComponents.green)
@@ -245,21 +248,23 @@ struct DetailView: View {
                 }
                 .padding(.bottom)
                 
-                if (detailModel.campaign?.creator_id?.contains(appSettings.user?.id ?? 0) ?? false) {
-                    Button {
-                        deleteCampaignConfirm = true
-                    } label: {
-                        Text("Elimina campagna")
-                            .foregroundColor(Color.red)
-                            .padding()
-                    }
-                    .padding(.bottom)
-                    .confirmationDialog("Vuoi eliminare la campagna?", isPresented: $deleteCampaignConfirm) {
-                        Button("Elimina", role: .destructive) {
-                            detailModel.deleteCampaign(usrToken: appSettings.usrToken, campaignId: campaignId)
+                VStack {
+                    if (detailModel.campaign?.creator_id?.contains(appSettings.user?.id ?? 0) ?? false) {
+                        Button {
+                            deleteCampaignConfirm = true
+                        } label: {
+                            Text("Elimina campagna")
+                                .foregroundColor(Color.red)
+                                .padding()
+                        }
+                        .confirmationDialog("Vuoi eliminare la campagna?", isPresented: $deleteCampaignConfirm) {
+                            Button("Elimina", role: .destructive) {
+                                detailModel.deleteCampaign(usrToken: appSettings.usrToken, campaignId: campaignId)
+                            }
                         }
                     }
                 }
+                .padding(.bottom)
             }
         }
         .onAppear() {
@@ -285,6 +290,14 @@ struct DetailView: View {
                 presentationMode.wrappedValue.dismiss()
             }
         }
+    }
+    
+    func openMaps() {
+        guard let lat = detailModel.campaign?.location_lat else { return }
+        guard let lng = detailModel.campaign?.location_lng else { return }
+        let urlString = "http://maps.apple.com/?ll=\(lat),\(lng)"
+        guard let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url)
     }
 }
 
