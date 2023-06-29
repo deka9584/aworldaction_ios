@@ -10,24 +10,47 @@ import SwiftUI
 struct AccountView: View {
     @EnvironmentObject var appSettings: AppSettings
     @StateObject var accountModel = AccountModel()
-    @State var isPresentingConfirm: Bool = false
+    @State var isPresentingConfirm = false
     
     var body: some View {
         VStack(spacing: 0) {
             NavigationView {
                 ScrollView {
                     HStack {
-                        Image(systemName: "person.circle")
-                            .imageScale(.large)
-                            .font(.title)
+                        ZStack {
+                            if let path = appSettings.user?.picture_path {
+                                AsyncImage(
+                                    url: appSettings.getStorageUrl(path: path),
+                                    content: {
+                                        image in image.resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .clipShape(Circle())
+                                    },
+                                    placeholder: {
+                                        ProgressView()
+                                    }
+                                )
+                                .frame(width: 80, height: 80)
+                                .clipped()
+                            } else {
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 80, height: 80)
+                            }
+                        }
+                        .onTapGesture {
+                            accountModel.showPictUpload = true
+                        }
                         VStack(alignment: .leading) {
                             Text(appSettings.user?.name ?? "Utente")
                                 .font(.body)
+                                .padding(.bottom, 1)
                             Text(appSettings.getRoleName(roleId: appSettings.user?.role_id ?? 0))
                                 .font(.caption)
                                 .textCase(.uppercase)
                         }
-                        .padding(.horizontal, 4)
+                        .padding()
                         Spacer()
                     }
                     .padding()
@@ -35,7 +58,17 @@ struct AccountView: View {
                     .cornerRadius(12)
                     .padding()
                     
-                    HStack {
+                    VStack {
+                        Button {
+                            accountModel.showChangePass = true
+                        } label: {
+                            Text("Cambia password")
+                                .padding()
+                                .foregroundColor(Color.white)
+                                .background(Color.orange)
+                                .cornerRadius(12)
+                        }
+                        
                         Button(role: .destructive) {
                             isPresentingConfirm = true
                         } label: {
@@ -57,6 +90,12 @@ struct AccountView: View {
                 .navigationTitle("Il tuo account")
             }
         }
+        .fullScreenCover(isPresented: $accountModel.showPictUpload) {
+            UploadProfilePictView(accountModel: accountModel)
+        }
+        .fullScreenCover(isPresented: $accountModel.showChangePass, content: {
+            ChangePasswordView(accountModel: accountModel)
+        })
     }
 }
 

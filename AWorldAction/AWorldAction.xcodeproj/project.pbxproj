@@ -19,6 +19,9 @@
 		EA3F3E312A4DC50300317177 /* UploadImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E302A4DC50300317177 /* UploadImageModel.swift */; };
 		EA3F3E332A4DC7D900317177 /* CampaignPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E322A4DC7D900317177 /* CampaignPicture.swift */; };
 		EA3F3E352A4DD83400317177 /* CampaignCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E342A4DD83400317177 /* CampaignCarouselView.swift */; };
+		EA46FC592A4E24A500B4ECAC /* UploadProfilePictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA46FC582A4E24A500B4ECAC /* UploadProfilePictView.swift */; };
+		EA46FC5B2A4E296B00B4ECAC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA46FC5A2A4E296B00B4ECAC /* Utils.swift */; };
+		EA46FC5D2A4E341700B4ECAC /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA46FC5C2A4E341700B4ECAC /* ChangePasswordView.swift */; };
 		EA5475192A2B737900EA5210 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5475182A2B737900EA5210 /* HomeView.swift */; };
 		EA54751D2A2B749500EA5210 /* InprogressCampaignsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA54751C2A2B749500EA5210 /* InprogressCampaignsView.swift */; };
 		EA54751F2A2B773B00EA5210 /* CampaignListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA54751E2A2B773B00EA5210 /* CampaignListModel.swift */; };
@@ -66,6 +69,9 @@
 		EA3F3E302A4DC50300317177 /* UploadImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageModel.swift; sourceTree = "<group>"; };
 		EA3F3E322A4DC7D900317177 /* CampaignPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignPicture.swift; sourceTree = "<group>"; };
 		EA3F3E342A4DD83400317177 /* CampaignCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignCarouselView.swift; sourceTree = "<group>"; };
+		EA46FC582A4E24A500B4ECAC /* UploadProfilePictView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfilePictView.swift; sourceTree = "<group>"; };
+		EA46FC5A2A4E296B00B4ECAC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		EA46FC5C2A4E341700B4ECAC /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		EA5475182A2B737900EA5210 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EA54751C2A2B749500EA5210 /* InprogressCampaignsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InprogressCampaignsView.swift; sourceTree = "<group>"; };
 		EA54751E2A2B773B00EA5210 /* CampaignListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignListModel.swift; sourceTree = "<group>"; };
@@ -183,11 +189,13 @@
 				EA54751A2A2B737E00EA5210 /* auth */,
 				EA5475182A2B737900EA5210 /* HomeView.swift */,
 				EA76FD182A2CE76200A35B95 /* AccountView.swift */,
+				EA46FC582A4E24A500B4ECAC /* UploadProfilePictView.swift */,
 				EA6019142A2FA15900EF337F /* DetailView.swift */,
 				EA9E12782A41CACE00A00C1A /* EditCommentView.swift */,
 				EA9D9A362A4C2868006293AF /* UploadImageView.swift */,
 				EA3F3E212A4CBBB400317177 /* CreateCampaignView.swift */,
 				EA3F3E2B2A4DBC3000317177 /* ImagePickerView.swift */,
+				EA46FC5C2A4E341700B4ECAC /* ChangePasswordView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -211,6 +219,7 @@
 				EA76FD1A2A2D004200A35B95 /* shapes */,
 				EA19598829DF51F9006E1D5A /* StringComponents.swift */,
 				EAE244E42A03A13300D03599 /* ColorComponents.swift */,
+				EA46FC5A2A4E296B00B4ECAC /* Utils.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -357,6 +366,7 @@
 				EA3F3E352A4DD83400317177 /* CampaignCarouselView.swift in Sources */,
 				EA3F3E2C2A4DBC3000317177 /* ImagePickerView.swift in Sources */,
 				EA5475192A2B737900EA5210 /* HomeView.swift in Sources */,
+				EA46FC592A4E24A500B4ECAC /* UploadProfilePictView.swift in Sources */,
 				EA3F3E242A4CBE5E00317177 /* MapView.swift in Sources */,
 				EA6019152A2FA15900EF337F /* DetailView.swift in Sources */,
 				EA3F3E2F2A4DBF8400317177 /* ImagePickerCoordinator.swift in Sources */,
@@ -364,11 +374,13 @@
 				EA9E12792A41CACE00A00C1A /* EditCommentView.swift in Sources */,
 				EA9404F62A33BBBB00BD852D /* Comment.swift in Sources */,
 				EA3F3E222A4CBBB400317177 /* CreateCampaignView.swift in Sources */,
+				EA46FC5D2A4E341700B4ECAC /* ChangePasswordView.swift in Sources */,
 				EA9625FF2A177C8700D792A4 /* LoggedUser.swift in Sources */,
 				EAC7BF1629EDAD3B001650E7 /* RegisterView.swift in Sources */,
 				EA9625FA2A1773AE00D792A4 /* AuthResponse.swift in Sources */,
 				EAE244E22A039EEF00D03599 /* WelcomeModel.swift in Sources */,
 				EAC7BF1829EDAD8D001650E7 /* RegisterModel.swift in Sources */,
+				EA46FC5B2A4E296B00B4ECAC /* Utils.swift in Sources */,
 				EA6019172A2FA53C00EF337F /* DetailModel.swift in Sources */,
 				EA9D9A372A4C2868006293AF /* UploadImageView.swift in Sources */,
 				EA76FD242A2DDC5300A35B95 /* FavouritesCampaignsView.swift in Sources */,

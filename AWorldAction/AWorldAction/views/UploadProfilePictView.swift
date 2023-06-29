@@ -1,20 +1,17 @@
 //
-//  UploadImageView.swift
+//  UploadProfilePictView.swift
 //  AWorldAction
 //
-//  Created by Andrea Sala on 28/06/23.
+//  Created by Andrea Sala on 29/06/23.
 //
 
 import SwiftUI
 
-struct UploadImageView: View {
-    let campaignId: Int
+struct UploadProfilePictView: View {
     @EnvironmentObject var appSettings: AppSettings
-    @ObservedObject var uploadImageModel = UploadImageModel()
-    @Binding var showUpload: Bool
-    @State var userCaption = ""
+    @ObservedObject var accountModel: AccountModel
     @State var showPicker = false
-    @State var selectedImage: UIImage?
+    @State var newImage: UIImage?
     
     var body: some View {
         VStack {
@@ -31,7 +28,7 @@ struct UploadImageView: View {
                             .padding(.horizontal)
                     }
                 }
-                Text(StringComponents.uploadImage)
+                Text("Carica immagine")
                     .font(.title)
                     .bold()
                     .foregroundColor(Color.white)
@@ -39,17 +36,19 @@ struct UploadImageView: View {
             .frame(maxWidth: .infinity, minHeight: 60)
             .background(ColorComponents.lightGreen)
             
+            Spacer()
+            
             VStack {
-                if let image = selectedImage {
+                if let image = newImage {
                     Image(uiImage: image)
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300)
-                        .clipped()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(Circle())
+                        .padding()
                 } else {
-                    VStack {
-                        Spacer()
+                    Button {
                         
+                    } label: {
                         Button {
                             showPicker = true
                         } label: {
@@ -59,29 +58,15 @@ struct UploadImageView: View {
                             }
                             .padding()
                         }
-                        
-                        Spacer()
                     }
                 }
-                
-                Text("Descrizione")
-                    .font(.title2)
-                    .padding(.top)
-                
-                TextField("Descrizione", text: $userCaption)
-                    .keyboardType(.emailAddress)
-                    .frame(maxWidth: .infinity, minHeight: 50)
-                    .padding(.horizontal)
-                    .background(ColorComponents.lightGray)
-                    .cornerRadius(12)
             }
-            .padding()
             
             Spacer()
             
             Button {
-                if let image = selectedImage {
-                    uploadImageModel.uploadImage(usrToken: appSettings.usrToken, image: image, campaignId: campaignId, caption: userCaption)
+                if let image = newImage {
+                    accountModel.uploadImage(usrToken: appSettings.usrToken, image: image)
                 }
             } label: {
                 Text(StringComponents.uploadImage)
@@ -90,25 +75,27 @@ struct UploadImageView: View {
                     .background(ColorComponents.green)
                     .cornerRadius(12)
             }
-            .disabled(selectedImage == nil)
-            .opacity(selectedImage == nil ? 0.8 : 1)
+            .disabled(newImage == nil)
+            .opacity(newImage == nil ? 0.8 : 1)
         }
         .fullScreenCover(isPresented: $showPicker, content: {
-            ImagePickerView(sourceType: .photoLibrary, image: $selectedImage, isPresented: $showPicker)
+            ImagePickerView(sourceType: .photoLibrary, image: $newImage, isPresented: $showPicker)
         })
-        .onChange(of: uploadImageModel.success) { success in
-            if (success) {
+        .onChange(of: accountModel.loading) { loading in
+            if (!loading) {
                 close()
-            }
-        }
-        .overlay() {
-            if (uploadImageModel.loading) {
-                ProgressView()
+                appSettings.checkAuth()
             }
         }
     }
     
     func close() {
-        showUpload = false
+        accountModel.showPictUpload = false
+    }
+}
+
+struct UploadProfilePictView_Previews: PreviewProvider {
+    static var previews: some View {
+        UploadProfilePictView(accountModel: AccountModel())
     }
 }

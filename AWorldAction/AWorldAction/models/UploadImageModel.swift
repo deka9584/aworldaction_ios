@@ -25,7 +25,7 @@ public class UploadImageModel: ObservableObject {
             "caption": caption,
         ]
         
-        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+        guard let imageData = Utils.compressImage(image, maxSizeInBytes: 2 * 1024 * 1024) else {
             print("Errore nella conversione dell'immagine")
             return
         }

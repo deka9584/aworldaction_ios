@@ -1,33 +1,35 @@
 //
-//  LoginView.swift
+//  ChangePasswordView.swift
 //  AWorldAction
 //
-//  Created by Andrea Sala on 06/04/23.
+//  Created by Andrea Sala on 29/06/23.
 //
 
 import SwiftUI
 
-struct LoginView: View {
+struct ChangePasswordView: View {
     @EnvironmentObject var appSettings: AppSettings
-    @ObservedObject var welcomeModel: WelcomeModel
-    @ObservedObject var loginModel = LoginModel()
+    @ObservedObject var accountModel: AccountModel
+    @State var currPass = ""
+    @State var newPass = ""
+    @State var newPassConfirm = ""
     
     var body: some View {
-        
         VStack {
             ZStack {
                 HStack {
+                    Spacer()
+                    
                     Button {
-                        welcomeModel.showLoginView = false
+                        close()
                     } label: {
-                        Image(systemName: "arrowtriangle.backward.fill")
+                        Image(systemName: "xmark.circle.fill")
                             .imageScale(.large)
                             .foregroundColor(Color.white)
                             .padding(.horizontal)
                     }
-                    Spacer()
                 }
-                Text(StringComponents.loginViewTitle)
+                Text("Cambia password")
                     .font(.title)
                     .bold()
                     .foregroundColor(Color.white)
@@ -38,16 +40,23 @@ struct LoginView: View {
             Spacer()
             
             VStack {
-                TextField(StringComponents.loginUserHint, text: $loginModel.emailField)
-                    .textContentType(.emailAddress)
-                    .keyboardType(.emailAddress)
+                SecureField("Password attuale", text: $currPass)
+                    .textContentType(.password)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
                     .background(ColorComponents.lightGray)
                     .cornerRadius(12)
                     .padding(.bottom)
                 
-                SecureField(StringComponents.loginPassHint, text: $loginModel.passField)
+                SecureField("Nuova password", text: $newPass)
+                    .textContentType(.password)
+                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .padding(.horizontal)
+                    .background(ColorComponents.lightGray)
+                    .cornerRadius(12)
+                    .padding(.bottom)
+                
+                SecureField("Conferma nuova password", text: $newPassConfirm)
                     .textContentType(.password)
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .padding(.horizontal)
@@ -56,49 +65,48 @@ struct LoginView: View {
                     .padding(.bottom)
                 
                 Button {
-                    loginModel.sendRequest(appSettings: appSettings)
+                    accountModel.changePassword(usrToken: appSettings.usrToken, currentPass: currPass, newPass: newPass, newPassConfirm: newPassConfirm)
                 } label: {
                     ZStack {
-                        if (loginModel.loading) {
+                        if (accountModel.loading) {
                             ProgressView()
                         }
                         
-                        Text(StringComponents.loginBtn)
+                        Text("Cambia password")
                             .frame(maxWidth: .infinity, minHeight: 50)
                             .background(ColorComponents.lightGreen)
                             .foregroundColor(Color.white)
                             .cornerRadius(12)
                     }
                 }
-                .disabled(loginModel.loading)
+                .disabled(accountModel.loading)
                 
-                if (loginModel.status != "") {
-                    Text(loginModel.status)
+                if (accountModel.message != "") {
+                    Text(accountModel.message)
                         .foregroundColor(Color.red)
                         .textCase(Text.Case.uppercase)
                         .font(.caption)
                         .padding(.top)
                 }
-                
-                VStack {
-                    Button {
-                        welcomeModel.showLoginView = false
-                        welcomeModel.showRegisterView = true
-                    } label: {
-                        Text(StringComponents.registerBtn)
-                    }
-                }
-                .padding(.vertical)
             }
-            .padding()
+            .padding(.horizontal)
             
             Spacer()
         }
+        .onChange(of: accountModel.changePasswordSuccess) { success in
+            if (success) {
+                close()
+            }
+        }
+    }
+    
+    func close() {
+        accountModel.showChangePass = false
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct ChangePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(welcomeModel: WelcomeModel())
+        ChangePasswordView(accountModel: AccountModel())
     }
 }

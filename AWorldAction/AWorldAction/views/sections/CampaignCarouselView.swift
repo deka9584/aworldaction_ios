@@ -45,11 +45,14 @@ struct CampaignCarouselView: View {
                         .background(Color.black.opacity(0.6))
                         .cornerRadius(12)
                         .padding(.top)
+                        .padding(.horizontal)
                         
                         Spacer()
                     }
                     
                     VStack {
+                        Spacer()
+                        
                         if (picture.user_id == appSettings.user?.id) {
                             HStack {
                                 Spacer()
@@ -74,8 +77,7 @@ struct CampaignCarouselView: View {
                                     }
                                 }
                             }
-                            
-                            Spacer()
+                            .padding(.bottom)
                         }
                     }
                 }

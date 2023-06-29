@@ -17,23 +17,9 @@ public class ImagePickerCoordinator: NSObject, UINavigationControllerDelegate, U
         self._isPresented = isPresented
     }
     
-    func compressImage(_ image: UIImage, maxSizeInBytes: Int) -> Data? {
-        var compression: CGFloat = 1.0
-        var imageData = image.jpegData(compressionQuality: compression)
-        
-        while let data = imageData, data.count > maxSizeInBytes && compression > 0 {
-            compression -= 0.1
-            imageData = image.jpegData(compressionQuality: compression)
-        }
-        
-        return imageData
-    }
-    
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            if let compressedImage = compressImage(image, maxSizeInBytes: 2 * 1024 * 1024) {
-                self.image = UIImage(data: compressedImage)
-            }
+            self.image = image
         }
             
         self.isPresented = false

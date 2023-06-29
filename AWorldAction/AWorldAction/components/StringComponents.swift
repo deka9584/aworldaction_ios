@@ -25,8 +25,6 @@ struct StringComponents {
     private(set) static var newUserHint = "Crea un nuovo username"
     private(set) static var emailHint = "Inserisci una e-mail"
     private(set) static var confirmPassHint = "Conferma password"
-    
-    private(set) static var passRecoveryLink = "Recupera password"
     private(set) static var loginLink = "Ho già un account"
     
     private(set) static var accountStep1 = "Inserisci i dati del tuo account"

@@ -56,6 +56,40 @@ public class DetailModel: ObservableObject {
         loadComments(headers: headers, campaignId: campaignId)
     }
     
+    func update(usrToken: String, campaignId: Int, campaignStatus: Bool) {
+        guard let campaign = self.campaign else { return }
+        let url = apiUrl + "/campaigns/" + String(campaignId)
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        let body: [String : Any] = [
+            "name": campaign.name,
+            "description": campaign.description,
+            "completed": campaignStatus ? 1 : 0
+        ]
+        
+        loading = true
+        
+        AF.request(url, method: .put, parameters: body, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: CampaignResponse.self) { response in
+                switch response.result {
+                    
+                case .success(let responseData):
+                    if let campaign = responseData.campaign {
+                        self.campaign = campaign
+                    }
+                    
+                    print(responseData)
+                    
+                case .failure(let error):
+                    print(error)
+                }
+                
+                self.loading = false
+            }
+    }
+    
     func deleteCampaign(usrToken: String, campaignId: Int) {
         let url = apiUrl + "/campaigns/" + String(campaignId)
         let headers: HTTPHeaders = [

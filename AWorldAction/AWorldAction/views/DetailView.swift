@@ -196,12 +196,37 @@ struct DetailView: View {
                 
                 VStack {
                     if (detailModel.campaign?.creator_id?.contains(appSettings.user?.id ?? 0) ?? false) {
+                        
+                        if (detailModel.campaign?.completed == 1) {
+                            Button {
+                                detailModel.update(usrToken: appSettings.usrToken, campaignId: campaignId, campaignStatus: false)
+                            } label: {
+                                Text("Contrassegna come ancora in corso")
+                                    .padding(10)
+                                    .foregroundColor(Color.white)
+                                    .background(Color.orange)
+                                    .cornerRadius(12)
+                            }
+                        } else {
+                            Button {
+                                detailModel.update(usrToken: appSettings.usrToken, campaignId: campaignId, campaignStatus: true)
+                            } label: {
+                                Text("Contrassegna come completata")
+                                    .padding(10)
+                                    .foregroundColor(Color.white)
+                                    .background(ColorComponents.green)
+                                    .cornerRadius(12)
+                            }
+                        }
+                        
                         Button {
                             deleteCampaignConfirm = true
                         } label: {
                             Text("Elimina campagna")
-                                .foregroundColor(Color.red)
-                                .padding()
+                                .padding(10)
+                                .foregroundColor(Color.white)
+                                .background(Color.red)
+                                .cornerRadius(12)
                         }
                         .confirmationDialog("Vuoi eliminare la campagna?", isPresented: $deleteCampaignConfirm) {
                             Button("Elimina", role: .destructive) {
