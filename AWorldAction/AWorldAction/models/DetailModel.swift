@@ -8,12 +8,13 @@
 import Foundation
 import Alamofire
 
-public class CampaignModel: ObservableObject {
+public class DetailModel: ObservableObject {
     @Published var campaign: Campaign?
     @Published var pictures: [CampaignPictures] = []
     @Published var contributors: [UserProfile] = []
     @Published var comments: [Comment] = []
     @Published var loading = false
+    @Published var deleted = false
     
     func fetch(usrToken: String, campaignId: Int) {
         let url = apiUrl + "/campaigns/" + String(campaignId)
@@ -49,6 +50,32 @@ public class CampaignModel: ObservableObject {
             }
         
         loadComments(headers: headers, campaignId: campaignId)
+    }
+    
+    func deleteCampaign(usrToken: String, campaignId: Int) {
+        let url = apiUrl + "/campaigns/" + String(campaignId)
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        
+        loading = true
+        
+        AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: CampaignResponse.self) { response in
+                switch response.result {
+                    
+                case .success(let responseData):
+                    if response.response?.statusCode == 200 {
+                        self.deleted = true
+                    }
+                    
+                    print(responseData)
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            }
     }
     
     func loadComments(headers: HTTPHeaders, campaignId: Int) {

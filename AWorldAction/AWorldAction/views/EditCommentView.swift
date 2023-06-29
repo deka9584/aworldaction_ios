@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditCommentView: View {
     @EnvironmentObject var appSettings: AppSettings
-    @StateObject var campaignModel: CampaignModel
+    @StateObject var campaignModel: DetailModel
     @Binding var showEdit: Bool
     @Binding var editingComment: Comment?
     @State var userText = ""

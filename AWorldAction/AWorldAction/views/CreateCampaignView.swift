@@ -48,7 +48,11 @@ struct CreateCampaignView: View {
                         .foregroundColor(ColorComponents.lightGreen)
                         .padding()
                     
-                    Text("Campagna creata correttamente")
+                    Text(StringComponents.campaignCreated1)
+                        .padding(.top)
+                    
+                    Text(StringComponents.campaignCreated2)
+                        .multilineTextAlignment(.center)
                         .padding()
                     
                     Button {
@@ -100,7 +104,7 @@ struct CreateCampaignView: View {
                     
                     MapView(coordinate: locationManager.currentLocation ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0))
                         .edgesIgnoringSafeArea(.all)
-                        .cornerRadius(24, corners: [.topLeft, .bottomRight])
+                        .cornerRadius(12)
                 }
                 .padding()
                 

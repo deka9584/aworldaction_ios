@@ -9,23 +9,25 @@ import SwiftUI
 
 struct DetailView: View {
     let campaignId: Int
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var appSettings: AppSettings
-    @StateObject var campaignModel = CampaignModel()
+    @StateObject var detailModel = DetailModel()
     @State var userComment = ""
     @State var deleteCommentConfirm = false
     @State var showEdit = false
     @State var editingComment: Comment?
     @State var showUpload = false
+    @State var deleteCampaignConfirm = false
     
     var body: some View {
         VStack {
             ScrollView {
-                Text(campaignModel.campaign?.name ?? "Nome campagna")
+                Text(detailModel.campaign?.name ?? "Nome campagna")
                     .font(.title)
                     .padding()
                 
                 TabView {
-                    ForEach(campaignModel.pictures) { picture in
+                    ForEach(detailModel.pictures) { picture in
                         AsyncImage(
                             url: picture.getUrl(),
                             content: {
@@ -96,7 +98,7 @@ struct DetailView: View {
                     HStack {
                         Image(systemName: "location.circle.fill")
                             .imageScale(.large)
-                        Text(campaignModel.campaign?.location_name ?? "Località")
+                        Text(detailModel.campaign?.location_name ?? "Località")
                     }
                     .padding(.top)
                     
@@ -106,7 +108,7 @@ struct DetailView: View {
                         .bold()
                         .padding(.top)
                     
-                    Text(campaignModel.campaign?.description ?? "Descrizione")
+                    Text(detailModel.campaign?.description ?? "Descrizione")
                         .padding(.horizontal)
                         .padding(.top)
                     
@@ -117,7 +119,7 @@ struct DetailView: View {
                         .padding(.top)
                     
                     HStack {
-                        if (campaignModel.campaign?.completed == 1) {
+                        if (detailModel.campaign?.completed == 1) {
                             Image(systemName: "checkmark.square.fill")
                                 .imageScale(.large)
                                 .foregroundColor(ColorComponents.green)
@@ -145,13 +147,13 @@ struct DetailView: View {
                     .padding(.top)
                 
                 VStack(spacing: 20) {
-                    ForEach (campaignModel.contributors) {
+                    ForEach (detailModel.contributors) {
                         contributor in
                         HStack {
                             UserPictureView(path: contributor.picture_path, size: 40)
                             Text(contributor.name)
                                 .padding()
-                            Text(campaignModel.campaign?.creator_id?.contains(contributor.id) ?? false ? "Creatore" : "Contributore")
+                            Text(detailModel.campaign?.creator_id?.contains(contributor.id) ?? false ? "Creatore" : "Contributore")
                                 .textCase(.uppercase)
                                 .font(.caption)
                         }
@@ -173,7 +175,7 @@ struct DetailView: View {
                         TextField("Il tuo commento", text: $userComment)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         Button {
-                            campaignModel.insertComment(usrToken: appSettings.usrToken, campaignId: campaignId, body: userComment)
+                            detailModel.insertComment(usrToken: appSettings.usrToken, campaignId: campaignId, body: userComment)
                             userComment = ""
                         } label: {
                             Text("Commenta")
@@ -190,7 +192,7 @@ struct DetailView: View {
                 .padding()
                 
                 VStack(alignment: .center, spacing: 20) {
-                    ForEach (campaignModel.comments) {
+                    ForEach (detailModel.comments) {
                         comment in
                         HStack {
                             UserPictureView(path: comment.picture_path, size: 40)
@@ -226,10 +228,10 @@ struct DetailView: View {
                                     Image(systemName: "trash.fill")
                                         .foregroundColor(Color.red)
                                 }
-                                .confirmationDialog("Vuoi eliminare il comment", isPresented: $deleteCommentConfirm) {
+                                .confirmationDialog("Vuoi eliminare il commento", isPresented: $deleteCommentConfirm) {
                                     Button("Elimina", role: .destructive) {
                                         if let commentId = editingComment?.id {
-                                            campaignModel.deleteComment(usrToken: appSettings.usrToken, commentId: commentId)
+                                            detailModel.deleteComment(usrToken: appSettings.usrToken, commentId: commentId)
                                             editingComment = nil
                                         }
                                     }
@@ -242,15 +244,31 @@ struct DetailView: View {
                     }
                 }
                 .padding(.bottom)
+                
+                if (detailModel.campaign?.creator_id?.contains(appSettings.user?.id ?? 0) ?? false) {
+                    Button {
+                        deleteCampaignConfirm = true
+                    } label: {
+                        Text("Elimina campagna")
+                            .foregroundColor(Color.red)
+                            .padding()
+                    }
+                    .padding(.bottom)
+                    .confirmationDialog("Vuoi eliminare la campagna?", isPresented: $deleteCampaignConfirm) {
+                        Button("Elimina", role: .destructive) {
+                            detailModel.deleteCampaign(usrToken: appSettings.usrToken, campaignId: campaignId)
+                        }
+                    }
+                }
             }
         }
         .onAppear() {
             if (campaignId != 0) {
-                campaignModel.fetch(usrToken: appSettings.usrToken, campaignId: campaignId)
+                detailModel.fetch(usrToken: appSettings.usrToken, campaignId: campaignId)
             }
         }
         .overlay() {
-            if (campaignModel.loading) {
+            if (detailModel.loading) {
                 VStack {
                     ProgressView()
                 }
@@ -260,8 +278,13 @@ struct DetailView: View {
             UploadImageView(showUpload: $showUpload)
         })
         .fullScreenCover(isPresented: $showEdit, content: {
-            EditCommentView(campaignModel: campaignModel ,showEdit: $showEdit, editingComment: $editingComment)
+            EditCommentView(campaignModel: detailModel ,showEdit: $showEdit, editingComment: $editingComment)
         })
+        .onChange(of: detailModel.deleted) { deleted in
+            if (deleted) {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
 }
 

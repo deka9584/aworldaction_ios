@@ -72,6 +72,7 @@ struct InprogressCampaignsView: View {
                 .refreshable {
                     refresh()
                 }
+                
             }
         }
         .onAppear() {
@@ -80,6 +81,11 @@ struct InprogressCampaignsView: View {
         .fullScreenCover(isPresented: $showCreate, content: {
             CreateCampaignView(showCreate: $showCreate)
         })
+        .onChange(of: showCreate) { showCreateStatus in
+            if (!showCreateStatus) {
+                refresh()
+            }
+        }
     }
     
     func refresh() {

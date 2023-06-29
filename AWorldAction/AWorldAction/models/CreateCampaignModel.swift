@@ -12,6 +12,7 @@ import CoreLocation
 public class CreateCampaignModel: ObservableObject {
     @Published var loading = false
     @Published var success = false
+    @Published var createdId = 0
     
     func postCampaign(usrToken: String, name: String, description: String, locality: String, location: CLLocationCoordinate2D) {
         let url = apiUrl + "/campaigns"
@@ -38,7 +39,9 @@ public class CreateCampaignModel: ObservableObject {
                         self.success = true
                     }
                     
-                    print(responseData)
+                    if let campaign = responseData.campaign {
+                        self.createdId = campaign.id
+                    }
                     
                 case .failure(let error):
                     print(error)

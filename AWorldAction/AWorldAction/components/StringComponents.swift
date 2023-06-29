@@ -44,5 +44,7 @@ struct StringComponents {
     private(set) static var editComment = "Modifica commento"
     private(set) static var uploadImage = "Pubblica aggiornamento"
     private(set) static var createCamlaign = "Crea campagna"
+    private(set) static var campaignCreated1 = "Campagna creata con successo."
+    private(set) static var campaignCreated2 = "Puoi trovarla nei tuoi preferiti ed iniziare ad aggiungere le prime immagini."
     
 }

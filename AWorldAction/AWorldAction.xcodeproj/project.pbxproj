@@ -19,7 +19,7 @@
 		EA54751F2A2B773B00EA5210 /* CampaignListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA54751E2A2B773B00EA5210 /* CampaignListModel.swift */; };
 		EA5475222A2B91FF00EA5210 /* CampaignBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5475212A2B91FF00EA5210 /* CampaignBoxView.swift */; };
 		EA6019152A2FA15900EF337F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6019142A2FA15900EF337F /* DetailView.swift */; };
-		EA6019172A2FA53C00EF337F /* CampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6019162A2FA53C00EF337F /* CampaignModel.swift */; };
+		EA6019172A2FA53C00EF337F /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6019162A2FA53C00EF337F /* DetailModel.swift */; };
 		EA76FD172A2CA87F00A35B95 /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD162A2CA87F00A35B95 /* Campaign.swift */; };
 		EA76FD192A2CE76200A35B95 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD182A2CE76200A35B95 /* AccountView.swift */; };
 		EA76FD1C2A2D006000A35B95 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD1B2A2D006000A35B95 /* RoundedCorner.swift */; };
@@ -61,7 +61,7 @@
 		EA54751E2A2B773B00EA5210 /* CampaignListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignListModel.swift; sourceTree = "<group>"; };
 		EA5475212A2B91FF00EA5210 /* CampaignBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignBoxView.swift; sourceTree = "<group>"; };
 		EA6019142A2FA15900EF337F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
-		EA6019162A2FA53C00EF337F /* CampaignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignModel.swift; sourceTree = "<group>"; };
+		EA6019162A2FA53C00EF337F /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
 		EA76FD162A2CA87F00A35B95 /* Campaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
 		EA76FD182A2CE76200A35B95 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		EA76FD1B2A2D006000A35B95 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 			children = (
 				EA54751B2A2B73A100EA5210 /* auth */,
 				EA54751E2A2B773B00EA5210 /* CampaignListModel.swift */,
-				EA6019162A2FA53C00EF337F /* CampaignModel.swift */,
+				EA6019162A2FA53C00EF337F /* DetailModel.swift */,
 				EA9E12752A41C4E800A00C1A /* AccountModel.swift */,
 				EA3F3E272A4CBFA900317177 /* CreateCampaignModel.swift */,
 			);
@@ -349,7 +349,7 @@
 				EA9625FA2A1773AE00D792A4 /* AuthResponse.swift in Sources */,
 				EAE244E22A039EEF00D03599 /* WelcomeModel.swift in Sources */,
 				EAC7BF1829EDAD8D001650E7 /* RegisterModel.swift in Sources */,
-				EA6019172A2FA53C00EF337F /* CampaignModel.swift in Sources */,
+				EA6019172A2FA53C00EF337F /* DetailModel.swift in Sources */,
 				EA9D9A372A4C2868006293AF /* UploadImageView.swift in Sources */,
 				EA76FD242A2DDC5300A35B95 /* FavouritesCampaignsView.swift in Sources */,
 				EA0B43F42A3243C500EC3923 /* UserPictureView.swift in Sources */,
