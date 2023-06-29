@@ -14,6 +14,11 @@
 		EA3F3E242A4CBE5E00317177 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E232A4CBE5E00317177 /* MapView.swift */; };
 		EA3F3E282A4CBFA900317177 /* CreateCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E272A4CBFA900317177 /* CreateCampaignModel.swift */; };
 		EA3F3E2A2A4CC32700317177 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E292A4CC32700317177 /* LocationManager.swift */; };
+		EA3F3E2C2A4DBC3000317177 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E2B2A4DBC3000317177 /* ImagePickerView.swift */; };
+		EA3F3E2F2A4DBF8400317177 /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E2E2A4DBF8400317177 /* ImagePickerCoordinator.swift */; };
+		EA3F3E312A4DC50300317177 /* UploadImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E302A4DC50300317177 /* UploadImageModel.swift */; };
+		EA3F3E332A4DC7D900317177 /* CampaignPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E322A4DC7D900317177 /* CampaignPicture.swift */; };
+		EA3F3E352A4DD83400317177 /* CampaignCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E342A4DD83400317177 /* CampaignCarouselView.swift */; };
 		EA5475192A2B737900EA5210 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5475182A2B737900EA5210 /* HomeView.swift */; };
 		EA54751D2A2B749500EA5210 /* InprogressCampaignsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA54751C2A2B749500EA5210 /* InprogressCampaignsView.swift */; };
 		EA54751F2A2B773B00EA5210 /* CampaignListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA54751E2A2B773B00EA5210 /* CampaignListModel.swift */; };
@@ -56,6 +61,11 @@
 		EA3F3E232A4CBE5E00317177 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EA3F3E272A4CBFA900317177 /* CreateCampaignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCampaignModel.swift; sourceTree = "<group>"; };
 		EA3F3E292A4CC32700317177 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		EA3F3E2B2A4DBC3000317177 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		EA3F3E2E2A4DBF8400317177 /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
+		EA3F3E302A4DC50300317177 /* UploadImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageModel.swift; sourceTree = "<group>"; };
+		EA3F3E322A4DC7D900317177 /* CampaignPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignPicture.swift; sourceTree = "<group>"; };
+		EA3F3E342A4DD83400317177 /* CampaignCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignCarouselView.swift; sourceTree = "<group>"; };
 		EA5475182A2B737900EA5210 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EA54751C2A2B749500EA5210 /* InprogressCampaignsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InprogressCampaignsView.swift; sourceTree = "<group>"; };
 		EA54751E2A2B773B00EA5210 /* CampaignListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignListModel.swift; sourceTree = "<group>"; };
@@ -130,6 +140,7 @@
 				EADACEB82A31D7C000EC19D6 /* FetchCampaignsErrorView.swift */,
 				EA0B43F32A3243C500EC3923 /* UserPictureView.swift */,
 				EA3F3E232A4CBE5E00317177 /* MapView.swift */,
+				EA3F3E342A4DD83400317177 /* CampaignCarouselView.swift */,
 			);
 			path = sections;
 			sourceTree = "<group>";
@@ -149,6 +160,7 @@
 				EA76FD162A2CA87F00A35B95 /* Campaign.swift */,
 				EA76FD1D2A2D00ED00A35B95 /* UserProfile.swift */,
 				EA9404F52A33BBBB00BD852D /* Comment.swift */,
+				EA3F3E322A4DC7D900317177 /* CampaignPicture.swift */,
 			);
 			path = codables;
 			sourceTree = "<group>";
@@ -175,6 +187,7 @@
 				EA9E12782A41CACE00A00C1A /* EditCommentView.swift */,
 				EA9D9A362A4C2868006293AF /* UploadImageView.swift */,
 				EA3F3E212A4CBBB400317177 /* CreateCampaignView.swift */,
+				EA3F3E2B2A4DBC3000317177 /* ImagePickerView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -187,6 +200,7 @@
 				EA6019162A2FA53C00EF337F /* DetailModel.swift */,
 				EA9E12752A41C4E800A00C1A /* AccountModel.swift */,
 				EA3F3E272A4CBFA900317177 /* CreateCampaignModel.swift */,
+				EA3F3E302A4DC50300317177 /* UploadImageModel.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -207,6 +221,7 @@
 				EAE244E92A03AC1E00D03599 /* AppSettings.swift */,
 				EA9625FE2A177C8700D792A4 /* LoggedUser.swift */,
 				EA3F3E292A4CC32700317177 /* LocationManager.swift */,
+				EA3F3E2E2A4DBF8400317177 /* ImagePickerCoordinator.swift */,
 			);
 			path = settings;
 			sourceTree = "<group>";
@@ -328,8 +343,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAE244EA2A03AC1E00D03599 /* AppSettings.swift in Sources */,
+				EA3F3E312A4DC50300317177 /* UploadImageModel.swift in Sources */,
 				EA54751F2A2B773B00EA5210 /* CampaignListModel.swift in Sources */,
 				FF2E1E9729D57C380033072D /* ContentView.swift in Sources */,
+				EA3F3E332A4DC7D900317177 /* CampaignPicture.swift in Sources */,
 				EA54751D2A2B749500EA5210 /* InprogressCampaignsView.swift in Sources */,
 				EA3F3E282A4CBFA900317177 /* CreateCampaignModel.swift in Sources */,
 				EA76FD192A2CE76200A35B95 /* AccountView.swift in Sources */,
@@ -337,9 +354,12 @@
 				EADACEB92A31D7C000EC19D6 /* FetchCampaignsErrorView.swift in Sources */,
 				EA3F3E2A2A4CC32700317177 /* LocationManager.swift in Sources */,
 				EA76FD1C2A2D006000A35B95 /* RoundedCorner.swift in Sources */,
+				EA3F3E352A4DD83400317177 /* CampaignCarouselView.swift in Sources */,
+				EA3F3E2C2A4DBC3000317177 /* ImagePickerView.swift in Sources */,
 				EA5475192A2B737900EA5210 /* HomeView.swift in Sources */,
 				EA3F3E242A4CBE5E00317177 /* MapView.swift in Sources */,
 				EA6019152A2FA15900EF337F /* DetailView.swift in Sources */,
+				EA3F3E2F2A4DBF8400317177 /* ImagePickerCoordinator.swift in Sources */,
 				FF2E1EA329D6E2DD0033072D /* WelcomeView.swift in Sources */,
 				EA9E12792A41CACE00A00C1A /* EditCommentView.swift in Sources */,
 				EA9404F62A33BBBB00BD852D /* Comment.swift in Sources */,

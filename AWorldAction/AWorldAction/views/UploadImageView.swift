@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct UploadImageView: View {
+    let campaignId: Int
+    @EnvironmentObject var appSettings: AppSettings
+    @ObservedObject var uploadImageModel = UploadImageModel()
     @Binding var showUpload: Bool
     @State var userCaption = ""
+    @State var showPicker = false
+    @State var selectedImage: UIImage?
     
     var body: some View {
         VStack {
@@ -35,10 +40,28 @@ struct UploadImageView: View {
             .background(ColorComponents.lightGreen)
             
             VStack {
-                Button {
-                    
-                } label: {
-                    Text("Scatta una foto")
+                if let image = selectedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300)
+                        .clipped()
+                } else {
+                    VStack {
+                        Spacer()
+                        
+                        Button {
+                            showPicker = true
+                        } label: {
+                            HStack {
+                                Image(systemName: "photo")
+                                Text("Scegli una foto")
+                            }
+                            .padding()
+                        }
+                        
+                        Spacer()
+                    }
                 }
                 
                 Text("Descrizione")
@@ -57,13 +80,28 @@ struct UploadImageView: View {
             Spacer()
             
             Button {
-                
+                if let image = selectedImage {
+                    uploadImageModel.uploadImage(usrToken: appSettings.usrToken, image: image, campaignId: campaignId, caption: userCaption)
+                }
             } label: {
                 Text(StringComponents.uploadImage)
                     .foregroundColor(Color.white)
                     .padding()
                     .background(ColorComponents.green)
                     .cornerRadius(12)
+            }
+        }
+        .fullScreenCover(isPresented: $showPicker, content: {
+            ImagePickerView(sourceType: .photoLibrary, image: $selectedImage, isPresented: $showPicker)
+        })
+        .onChange(of: uploadImageModel.success) { success in
+            if (success) {
+                close()
+            }
+        }
+        .overlay() {
+            if (uploadImageModel.loading) {
+                ProgressView()
             }
         }
     }

@@ -27,61 +27,7 @@ struct DetailView: View {
                     .font(.title)
                     .padding()
                 
-                TabView {
-                    ForEach(detailModel.pictures) { picture in
-                        AsyncImage(
-                            url: picture.getUrl(),
-                            content: {
-                                image in image.resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .overlay() {
-                                        VStack {
-                                            VStack {
-                                                Text(picture.caption)
-                                                    .font(.caption)
-                                                    .foregroundColor(Color.white)
-                                                
-                                                Text(appSettings.formatDateString(dateString: picture.created_at))
-                                                    .font(.caption)
-                                                    .foregroundColor(Color.gray)
-                                                
-                                            }
-                                            .padding(8)
-                                            .background(Color.black.opacity(0.6))
-                                            .cornerRadius(12)
-                                            .padding(.top)
-                                            
-                                            Spacer()
-                                        }
-                                        .padding(1)
-                                    }
-                            },
-                            placeholder: {
-                                ProgressView()
-                            }
-                        )
-                    }
-                    
-                    Button {
-                        showUpload = true
-                    } label: {
-                        VStack {
-                            Image(systemName: "camera.circle.fill")
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                                .padding()
-                                .foregroundColor(Color.white)
-                            
-                            Text("Pubblica un aggiornamento")
-                                .font(.title2)
-                                .foregroundColor(Color.white)
-                        }
-                    }
-                }
-                .tabViewStyle(PageTabViewStyle())
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300)
-                .background(Color.gray)
+                CampaignCarouselView(detailModel: detailModel, showUpload: $showUpload)
                 
                 Text("Dettagli")
                     .font(.title2)
@@ -89,7 +35,7 @@ struct DetailView: View {
                 
                 VStack {
                     MapView(coordinate: CLLocationCoordinate2D(latitude: detailModel.campaign?.location_lat ?? 0, longitude: detailModel.campaign?.location_lng ?? 0))
-                        .frame(width: .infinity, height: 240)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300)
                         .cornerRadius(12, corners: [.bottomRight, .bottomLeft])
                     
                     Text("Località")
@@ -280,14 +226,19 @@ struct DetailView: View {
             }
         }
         .fullScreenCover(isPresented: $showUpload, content: {
-            UploadImageView(showUpload: $showUpload)
+            UploadImageView(campaignId: campaignId, showUpload: $showUpload)
         })
         .fullScreenCover(isPresented: $showEdit, content: {
-            EditCommentView(campaignModel: detailModel ,showEdit: $showEdit, editingComment: $editingComment)
+            EditCommentView(campaignModel: detailModel, showEdit: $showEdit, editingComment: $editingComment)
         })
         .onChange(of: detailModel.deleted) { deleted in
             if (deleted) {
                 presentationMode.wrappedValue.dismiss()
+            }
+        }
+        .onChange(of: showUpload) { showUpload in
+            if (!showUpload) {
+                detailModel.fetch(usrToken: appSettings.usrToken, campaignId: campaignId)
             }
         }
     }

@@ -25,6 +25,9 @@ public class DetailModel: ObservableObject {
         ]
         
         loading = true
+        pictures.removeAll()
+        contributors.removeAll()
+        comments.removeAll()
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: CampaignResponse.self) { response in
@@ -76,6 +79,8 @@ public class DetailModel: ObservableObject {
                 case .failure(let error):
                     print(error)
                 }
+                
+                self.loading = false
             }
     }
     
@@ -127,30 +132,6 @@ public class DetailModel: ObservableObject {
             }
     }
     
-    func deleteComment(usrToken: String, commentId: Int) {
-        let url = apiUrl + "/comments/" + String(commentId)
-        let headers: HTTPHeaders = [
-            .authorization(bearerToken: usrToken),
-            .accept("application/json")
-        ]
-        
-        AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers)
-            .responseDecodable(of: CommentResponse.self) { response in
-                switch response.result {
-                    
-                case .success(let responseData):
-                    if response.response?.statusCode == 200 {
-                        self.comments.removeAll { $0.id == commentId }
-                    }
-                    
-                    print(responseData)
-                    
-                case .failure(let error):
-                    print(error)
-                }
-            }
-    }
-    
     func editComment(usrToken: String, commentId: Int, body: String) {
         let url = apiUrl + "/comments/" + String(commentId)
         let headers: HTTPHeaders = [
@@ -177,6 +158,54 @@ public class DetailModel: ObservableObject {
                     print(responseData)
                     
                 case.failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    func deleteComment(usrToken: String, commentId: Int) {
+        let url = apiUrl + "/comments/" + String(commentId)
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        
+        AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: CommentResponse.self) { response in
+                switch response.result {
+                    
+                case .success(let responseData):
+                    if response.response?.statusCode == 200 {
+                        self.comments.removeAll { $0.id == commentId }
+                    }
+                    
+                    print(responseData)
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    func deletePicture(usrToken: String, pictureId: Int) {
+        let url = apiUrl + "/campaign-pictures/" + String(pictureId)
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        
+        AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: CampaignPicturesResponse.self) { response in
+                switch response.result {
+                    
+                case .success(let responseData):
+                    if response.response?.statusCode == 200 {
+                        self.pictures.removeAll { $0.id == pictureId }
+                    }
+                    
+                    print(responseData)
+                    
+                case .failure(let error):
                     print(error)
                 }
             }

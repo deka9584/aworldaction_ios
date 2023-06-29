@@ -32,19 +32,3 @@ struct Campaign: Codable, Identifiable {
     let created_at: String
     let updated_at: String
 }
-
-struct CampaignPictures: Codable, Identifiable {
-    let id: Int
-    let path: String
-    let caption: String
-    let campaign_id: Int
-    let user_id: Int
-    let created_at: String
-    let updated_at: String
-    
-    func getUrl() -> URL {
-        let serverUrl = apiUrl.replacingOccurrences(of: "api", with: "storage")
-        let newUrl = path.replacingOccurrences(of: "public", with: serverUrl)
-        return URL(string: newUrl)!
-    }
-}
