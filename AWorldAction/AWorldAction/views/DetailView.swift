@@ -195,6 +195,18 @@ struct DetailView: View {
                 .padding(.bottom)
                 
                 VStack {
+                    Button {
+                        guard let lat = detailModel.campaign?.location_lat else { return }
+                        guard let lng = detailModel.campaign?.location_lng else { return }
+                        Utils.openMaps(lat: lat, lng: lng)
+                    } label: {
+                        Text("Visualizza in Mappe")
+                            .padding(10)
+                            .foregroundColor(Color.white)
+                            .background(Color.blue)
+                            .cornerRadius(12)
+                    }
+                    
                     if (detailModel.campaign?.creator_id?.contains(appSettings.user?.id ?? 0) ?? false) {
                         
                         if (detailModel.campaign?.completed == 1) {
@@ -266,14 +278,6 @@ struct DetailView: View {
                 detailModel.fetch(usrToken: appSettings.usrToken, campaignId: campaignId)
             }
         }
-    }
-    
-    func openMaps() {
-        guard let lat = detailModel.campaign?.location_lat else { return }
-        guard let lng = detailModel.campaign?.location_lng else { return }
-        let urlString = "http://maps.apple.com/?ll=\(lat),\(lng)"
-        guard let url = URL(string: urlString) else { return }
-        UIApplication.shared.open(url)
     }
 }
 

@@ -105,6 +105,14 @@ struct CreateCampaignView: View {
                     MapView(coordinate: locationManager.currentLocation ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0))
                         .edgesIgnoringSafeArea(.all)
                         .cornerRadius(12)
+                    
+                    HStack {
+                        if let locality = locationManager.currentLocality {
+                            Image(systemName: "location.fill")
+                            Text(locality)
+                        }
+                    }
+                    .padding()
                 }
                 .padding()
                 

@@ -23,7 +23,7 @@ public class RegisterModel: ObservableObject {
         }
     }
     
-    func sendRequest(appSettings: AppSettings) {
+    func sendRequest(appSettings: AppSettings) { // Richiesta di registrazione
         let url = apiUrl + "/signup"
         let headers: HTTPHeaders = [
             .accept("application/json")
@@ -42,7 +42,7 @@ public class RegisterModel: ObservableObject {
                 switch response.result {
                     
                 case .success(let responseData):
-                    if ([200, 201].contains(response.response?.statusCode)) {
+                    if (![200, 201].contains(response.response?.statusCode)) {
                         self.status = responseData.message ?? ""
                     }
                     

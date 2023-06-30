@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 public class CampaignListModel: ObservableObject {
-    var toShow: String
+    var toShow: String // inprogress / favourites / completed
     @Published var campaignList: [Campaign] = []
     @Published var loading = false
     @Published var failed = false
@@ -19,15 +19,15 @@ public class CampaignListModel: ObservableObject {
         self.toShow = toShow
     }
     
-    func loadCampaigns(appSettings: AppSettings) {
+    func loadCampaigns(usrToken: String) { // Carica lista campagne
         let url = apiUrl + "/" + toShow
         let headers: HTTPHeaders = [
-            .authorization(bearerToken: appSettings.usrToken),
+            .authorization(bearerToken: usrToken),
             .accept("application/json")
         ]
         
         loading = true
-        campaignList.removeAll()
+        campaignList.removeAll() // Pulisce lista corrente
         
         AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: CampaignCollection.self) { response in
@@ -41,7 +41,7 @@ public class CampaignListModel: ObservableObject {
                     }
                     
                     responseData.data?.forEach({ campaign in
-                        self.campaignList.append(campaign)
+                        self.campaignList.append(campaign) // Aggiunge nuovi elementi alla lista
                     })
                     
                 case .failure(let error):

@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if (appSettings.usrToken != "") {
-                if (appSettings.requestFailed) {
+                if (appSettings.requestFailed) { // Errore di comunicazione con il server
                     Image(systemName: "person.crop.circle.badge.exclamationmark.fill")
                         .imageScale(.large)
                     Text(StringComponents.tokenVerificationError)
@@ -26,14 +26,14 @@ struct ContentView: View {
                         Text(StringComponents.retryBtn)
                     }
                 } else {
-                    HomeView()
+                    HomeView() // Se loggato mostra home view
                 }
             } else {
-                WelcomeView()
+                WelcomeView() // Se non loggato mostra accedi / registrati
             }
         }
         .onAppear() {
-            appSettings.checkAuth()
+            appSettings.checkAuth() // Controlla che il token sia valido
         }
     }
 }

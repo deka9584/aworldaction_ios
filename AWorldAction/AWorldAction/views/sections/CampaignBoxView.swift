@@ -91,7 +91,7 @@ struct CampaignBoxView: View {
                 }
                 
                 Button {
-                    //
+                    Utils.openMaps(lat: campaign.location_lat, lng: campaign.location_lng)
                 } label: {
                     Image(systemName: "arrow.triangle.turn.up.right.diamond.fill")
                         .padding(10)

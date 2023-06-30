@@ -26,7 +26,7 @@ struct Campaign: Codable, Identifiable {
     let location_lat: Double
     let location_lng: Double
     let completed: Int?
-    let pictures: [CampaignPictures]?
+    let pictures: [CampaignPicture]?
     let contributors: [UserProfile]?
     let creator_id: [Int]?
     let created_at: String

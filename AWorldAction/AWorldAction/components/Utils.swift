@@ -20,4 +20,10 @@ class Utils {
         
         return imageData
     }
+    
+    static func openMaps(lat: Double, lng: Double) {
+        let urlString = "http://maps.apple.com/?ll=\(lat),\(lng)"
+        guard let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url)
+    }
 }

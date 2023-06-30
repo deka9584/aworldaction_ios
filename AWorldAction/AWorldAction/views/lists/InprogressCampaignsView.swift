@@ -89,6 +89,6 @@ struct InprogressCampaignsView: View {
     }
     
     func refresh() {
-        cListModel.loadCampaigns(appSettings: appSettings)
+        cListModel.loadCampaigns(usrToken: appSettings.usrToken)
     }
 }

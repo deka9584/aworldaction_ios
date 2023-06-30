@@ -79,6 +79,12 @@ struct UploadImageView: View {
             
             Spacer()
             
+            if uploadImageModel.message != "" {
+                Text(uploadImageModel.message)
+                    .foregroundColor(Color.green)
+                    .padding()
+            }
+            
             Button {
                 if let image = selectedImage {
                     uploadImageModel.uploadImage(usrToken: appSettings.usrToken, image: image, campaignId: campaignId, caption: userCaption)
@@ -90,8 +96,8 @@ struct UploadImageView: View {
                     .background(ColorComponents.green)
                     .cornerRadius(12)
             }
-            .disabled(selectedImage == nil)
-            .opacity(selectedImage == nil ? 0.8 : 1)
+            .disabled(selectedImage == nil || userCaption == "" || uploadImageModel.loading)
+            .opacity(selectedImage == nil || userCaption == "" || uploadImageModel.loading ? 0.8 : 1)
         }
         .fullScreenCover(isPresented: $showPicker, content: {
             ImagePickerView(sourceType: .photoLibrary, image: $selectedImage, isPresented: $showPicker)

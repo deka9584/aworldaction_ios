@@ -14,7 +14,7 @@ public class CreateCampaignModel: ObservableObject {
     @Published var success = false
     @Published var createdId = 0
     
-    func postCampaign(usrToken: String, name: String, description: String, locality: String, location: CLLocationCoordinate2D) {
+    func postCampaign(usrToken: String, name: String, description: String, locality: String, location: CLLocationCoordinate2D) { // Creazione nuova campagna
         let url = apiUrl + "/campaigns"
         let headers: HTTPHeaders = [
             .authorization(bearerToken: usrToken),
@@ -40,7 +40,7 @@ public class CreateCampaignModel: ObservableObject {
                     }
                     
                     if let campaign = responseData.campaign {
-                        self.createdId = campaign.id
+                        self.createdId = campaign.id // Restituisce id campagna creata
                     }
                     
                 case .failure(let error):

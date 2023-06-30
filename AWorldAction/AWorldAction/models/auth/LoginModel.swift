@@ -14,7 +14,7 @@ public class LoginModel: ObservableObject {
     @Published var status = ""
     @Published var loading = false
     
-    func sendRequest(appSettings: AppSettings) {
+    func sendRequest(appSettings: AppSettings) { // Richiesta Login
         let url = apiUrl + "/login"
         let headers: HTTPHeaders = [
             .accept("application/json")
@@ -31,21 +31,21 @@ public class LoginModel: ObservableObject {
                 switch response.result {
                     
                 case .success(let responseData):
-                    if ([200, 201].contains(response.response?.statusCode)) {
+                    if (![200, 201].contains(response.response?.statusCode)) { // Se status non è 200 o 201 visualizza messaggio di errore
                         self.status = responseData.message ?? "Error"
                     }
                     
                     if let token = responseData.token {
-                        appSettings.usrToken = token
+                        appSettings.usrToken = token // Salva token su appSettings
                     }
                         
                     if let user = responseData.user {
-                        appSettings.user = user
+                        appSettings.user = user // Salva instanza modello user
                     }
                     
                 case .failure(let error):
                     print(error)
-                    self.status = StringComponents.loginError
+                    self.status = StringComponents.loginError // Errore di comunicazione con il server
                 }
                 
                 self.loading = false

@@ -12,9 +12,9 @@ import SwiftUI
 public class UploadImageModel: ObservableObject {
     @Published var loading = false
     @Published var success = false
-    @Published var message: String?
+    @Published var message = ""
     
-    func uploadImage(usrToken: String, image: UIImage, campaignId: Int, caption: String) {
+    func uploadImage(usrToken: String, image: UIImage, campaignId: Int, caption: String) { // Caricamento immagine campagna
         let url = apiUrl + "/campaign-pictures"
         let headers: HTTPHeaders = [
             .authorization(bearerToken: usrToken),
@@ -34,9 +34,9 @@ public class UploadImageModel: ObservableObject {
         
         AF.upload(
             multipartFormData: { multipartFormData in
-                // Aggiungi i dati dell'immagine all'oggetto multipartFormData
+                // Aggiunge i dati dell'immagine
                 multipartFormData.append(imageData, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
-                
+                // Aggiunge paramentri aggiuntivi (campaign_id, caption)
                 for (key, value) in parameters {
                     if let data = "\(value)".data(using: .utf8) {
                         multipartFormData.append(data, withName: key)
@@ -54,11 +54,16 @@ public class UploadImageModel: ObservableObject {
                 if response.response?.statusCode == 201 {
                     self.success = true
                     self.loading = false
+                } else if response.response?.statusCode == 401 {
+                    self.message = "Non sei autorizzato"
+                } else {
+                    self.message = "Immagine non accettata dal server"
                 }
                 
                 print(responseData)
                 
             case .failure(let error):
+                self.message = "Errore durante il caricamento dell'immagine"
                 print(error)
             }
         }

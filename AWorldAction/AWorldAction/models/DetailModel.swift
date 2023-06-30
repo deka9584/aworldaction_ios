@@ -11,13 +11,13 @@ import CoreLocation
 
 public class DetailModel: ObservableObject {
     @Published var campaign: Campaign?
-    @Published var pictures: [CampaignPictures] = []
+    @Published var pictures: [CampaignPicture] = []
     @Published var contributors: [UserProfile] = []
     @Published var comments: [Comment] = []
     @Published var loading = false
     @Published var deleted = false
     
-    func fetch(usrToken: String, campaignId: Int) {
+    func fetch(usrToken: String, campaignId: Int) { // Carica la campagna dal server
         let url = apiUrl + "/campaigns/" + String(campaignId)
         let headers: HTTPHeaders = [
             .authorization(bearerToken: usrToken),
@@ -36,14 +36,14 @@ public class DetailModel: ObservableObject {
                 case .success(let responseData):
                     if let campaign = responseData.data {
                         campaign.pictures?.forEach({ picture in
-                            self.pictures.append(picture)
+                            self.pictures.append(picture) // Carica immagini campagna
                         })
                         
                         campaign.contributors?.forEach({ contributor in
-                            self.contributors.append(contributor)
+                            self.contributors.append(contributor) // Carica contributori
                         })
                         
-                        self.campaign = campaign
+                        self.campaign = campaign // Carica instanza modello campagna
                     }
                     
                 case .failure(let error):
@@ -56,7 +56,7 @@ public class DetailModel: ObservableObject {
         loadComments(headers: headers, campaignId: campaignId)
     }
     
-    func update(usrToken: String, campaignId: Int, campaignStatus: Bool) {
+    func update(usrToken: String, campaignId: Int, campaignStatus: Bool) { // Update campagna
         guard let campaign = self.campaign else { return }
         let url = apiUrl + "/campaigns/" + String(campaignId)
         let headers: HTTPHeaders = [
@@ -77,7 +77,7 @@ public class DetailModel: ObservableObject {
                     
                 case .success(let responseData):
                     if let campaign = responseData.campaign {
-                        self.campaign = campaign
+                        self.campaign = campaign // Aggiorna instanza modello camapgna
                     }
                     
                     print(responseData)
@@ -138,7 +138,7 @@ public class DetailModel: ObservableObject {
             }
     }
     
-    func insertComment(usrToken: String, campaignId: Int, body: String) {
+    func insertComment(usrToken: String, campaignId: Int, body: String) { // Aggiunge commento
         let url = apiUrl + "/comments"
         let headers: HTTPHeaders = [
             .authorization(bearerToken: usrToken),
@@ -155,7 +155,7 @@ public class DetailModel: ObservableObject {
                     
                 case .success(let responseData):
                     if let comment = responseData.comment {
-                        self.comments.append(comment)
+                        self.comments.append(comment) // Aggiunge nuovo commento alla lista
                     }
                     
                     print(responseData)
@@ -166,7 +166,7 @@ public class DetailModel: ObservableObject {
             }
     }
     
-    func editComment(usrToken: String, commentId: Int, body: String) {
+    func editComment(usrToken: String, commentId: Int, body: String) { // Modifica commento
         let url = apiUrl + "/comments/" + String(commentId)
         let headers: HTTPHeaders = [
             .authorization(bearerToken: usrToken),
@@ -183,7 +183,7 @@ public class DetailModel: ObservableObject {
                     if let comment = responseData.comment {
                         for (index, existingComment) in self.comments.enumerated() {
                             if existingComment.id == comment.id {
-                                self.comments[index] = comment
+                                self.comments[index] = comment // Sostuisce commento con commento modificato
                                 break
                             }
                         }
@@ -197,7 +197,7 @@ public class DetailModel: ObservableObject {
             }
     }
     
-    func deleteComment(usrToken: String, commentId: Int) {
+    func deleteComment(usrToken: String, commentId: Int) { // Elimina commento
         let url = apiUrl + "/comments/" + String(commentId)
         let headers: HTTPHeaders = [
             .authorization(bearerToken: usrToken),
@@ -210,7 +210,7 @@ public class DetailModel: ObservableObject {
                     
                 case .success(let responseData):
                     if response.response?.statusCode == 200 {
-                        self.comments.removeAll { $0.id == commentId }
+                        self.comments.removeAll { $0.id == commentId } // Rimuove commento dalla lista
                     }
                     
                     print(responseData)
@@ -221,7 +221,7 @@ public class DetailModel: ObservableObject {
             }
     }
     
-    func deletePicture(usrToken: String, pictureId: Int) {
+    func deletePicture(usrToken: String, pictureId: Int) { // Elimina immagine campagna
         let url = apiUrl + "/campaign-pictures/" + String(pictureId)
         let headers: HTTPHeaders = [
             .authorization(bearerToken: usrToken),
@@ -229,12 +229,12 @@ public class DetailModel: ObservableObject {
         ]
         
         AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers)
-            .responseDecodable(of: CampaignPicturesResponse.self) { response in
+            .responseDecodable(of: CampaignPictureResponse.self) { response in
                 switch response.result {
                     
                 case .success(let responseData):
                     if response.response?.statusCode == 200 {
-                        self.pictures.removeAll { $0.id == pictureId }
+                        self.pictures.removeAll { $0.id == pictureId } // Elimina immagine dalla lista
                     }
                     
                     print(responseData)

@@ -17,13 +17,13 @@ public class AccountModel: ObservableObject {
     @Published var changePasswordSuccess = false
     @Published var message = ""
     
-    func uploadImage(usrToken: String, image: UIImage) {
+    func uploadImage(usrToken: String, image: UIImage) { // Aggiorna immagine profilo
         let url = apiUrl + "/loggeduser/picture"
         let headers: HTTPHeaders = [
             .authorization(bearerToken: usrToken),
             .accept("application/json")
         ]
-        
+        // Comprime immagine (max: 1MB)
         guard let imageData = Utils.compressImage(image, maxSizeInBytes: 2 * 1024 * 1024) else {
             print("Errore nella conversione dell'immagine")
             return
@@ -57,7 +57,7 @@ public class AccountModel: ObservableObject {
         }
     }
     
-    func changePassword(usrToken: String, currentPass: String, newPass: String, newPassConfirm: String) {
+    func changePassword(usrToken: String, currentPass: String, newPass: String, newPassConfirm: String) { // Cambio password
         let url = apiUrl + "/loggeduser/changepassword"
         let headers: HTTPHeaders = [
             .authorization(bearerToken: usrToken),
@@ -84,6 +84,7 @@ public class AccountModel: ObservableObject {
                     }
                     
                 case .failure(let error):
+                    self.message = "Errore aggiornamento password"
                     print(error)
                 }
             }

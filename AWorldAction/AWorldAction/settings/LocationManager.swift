@@ -21,16 +21,16 @@ public class LocationManager: NSObject, ObservableObject, CLLocationManagerDeleg
         clLM.startUpdatingLocation()
     }
 
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) { // Aggiorna posizione dell'utente
         guard let location = locations.last else { return }
-        currentLocation = location.coordinate
+        currentLocation = location.coordinate // Aggiorna variabile pubblished
         
         CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
             if let error = error {
                 print("Errore nel reverse geocoding: \(error.localizedDescription)")
             } else if let placemark = placemarks?.first {
                 if let locality = placemark.locality {
-                    self.currentLocality = locality
+                    self.currentLocality = locality // Aggiorna nome località corrente
                 }
             }
         }

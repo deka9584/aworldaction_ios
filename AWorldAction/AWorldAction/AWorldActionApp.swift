@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct AWorldActionApp: App {
-    @StateObject var appSettings = AppSettings()
+    @StateObject var appSettings = AppSettings() // EnvironmentObject
     
     var body: some Scene {
         WindowGroup {

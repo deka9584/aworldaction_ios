@@ -13,7 +13,6 @@ struct LoginView: View {
     @ObservedObject var loginModel = LoginModel()
     
     var body: some View {
-        
         VStack {
             ZStack {
                 HStack {
@@ -72,7 +71,7 @@ struct LoginView: View {
                 }
                 .disabled(loginModel.loading)
                 
-                if (loginModel.status != "") {
+                if (loginModel.status != "") { // Se presente un messaggio di status mostra il testo
                     Text(loginModel.status)
                         .foregroundColor(Color.red)
                         .textCase(Text.Case.uppercase)

@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct CampaignPicturesCollection: Codable {
+struct CampaignPictureCollection: Codable {
     let data: [Campaign]?
     let message: String?
 }
 
-struct CampaignPicturesResponse: Codable {
+struct CampaignPictureResponse: Codable {
     let message: String?
-    let data: CampaignPictures?
-    let campaignPicture: CampaignPictures?
+    let data: CampaignPicture?
+    let campaignPicture: CampaignPicture?
 }
 
-struct CampaignPictures: Codable, Identifiable {
+struct CampaignPicture: Codable, Identifiable {
     let id: Int
     let path: String
     let caption: String
