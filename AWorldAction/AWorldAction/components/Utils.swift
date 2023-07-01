@@ -9,15 +9,16 @@ import Foundation
 import SwiftUI
 
 class Utils {
-    static func compressImage(_ image: UIImage, maxSizeInBytes: Int) -> Data? {
-        var compression: CGFloat = 1.0
+    static func compressImage(_ image: UIImage, maxSizeInMB: CGFloat) -> Data? {
+        let maxFileSize = Int(maxSizeInMB * 1024 * 1024) // Converti la dimensione massima in byte
+        var compression: CGFloat = 1.0 // Inizia con la massima qualità
         var imageData = image.jpegData(compressionQuality: compression)
-        
-        while let data = imageData, data.count > maxSizeInBytes && compression > 0 {
-            compression -= 0.1
+
+        while (imageData?.count ?? 0) > maxFileSize && compression > 0.1 {
+            compression -= 0.1 // Riduci la qualità del 10% ad ogni iterazione
             imageData = image.jpegData(compressionQuality: compression)
         }
-        
+
         return imageData
     }
     

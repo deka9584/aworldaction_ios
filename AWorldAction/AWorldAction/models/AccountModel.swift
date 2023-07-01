@@ -23,8 +23,8 @@ public class AccountModel: ObservableObject {
             .authorization(bearerToken: usrToken),
             .accept("application/json")
         ]
-        // Comprime immagine (max: 1MB)
-        guard let imageData = Utils.compressImage(image, maxSizeInBytes: 2 * 1024 * 1024) else {
+        // Comprime immagine (max: 512K)
+        guard let imageData = Utils.compressImage(image, maxSizeInMB: 0.5) else {
             print("Errore nella conversione dell'immagine")
             return
         }
