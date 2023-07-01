@@ -30,6 +30,7 @@ public class AccountModel: ObservableObject {
         }
         
         loading = true
+        uploadSuccess = false
         
         AF.upload(
             multipartFormData: { multipartFormData in
@@ -43,7 +44,7 @@ public class AccountModel: ObservableObject {
             switch response.result {
                 
             case .success(let responseData):
-                if response.response?.statusCode == 201 {
+                if [200, 201].contains(response.response?.statusCode) {
                     self.uploadSuccess = true
                 }
                 
@@ -53,8 +54,41 @@ public class AccountModel: ObservableObject {
                 print(error)
             }
             
+            if (!self.uploadSuccess) {
+                self.message = "Impossibile aggiornare l'immagine"
+            }
+            
             self.loading = false
         }
+    }
+    
+    func deleteImage(usrToken: String) {
+        let url = apiUrl + "/loggeduser/picture"
+        let headers: HTTPHeaders = [
+            .authorization(bearerToken: usrToken),
+            .accept("application/json")
+        ]
+        
+        loading = true
+        
+        AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: AuthResponse.self) { response in
+                switch response.result {
+                    
+                case .success(let responseData):
+                    if let message = responseData.message {
+                        self.message = message
+                    }
+                    
+                    print(responseData)
+                    
+                case .failure(let error):
+                    self.message = "Errore durante la rimozione dell'immagine"
+                    print(error)
+                }
+                
+                self.loading = false
+            }
     }
     
     func changePassword(usrToken: String, currentPass: String, newPass: String, newPassConfirm: String) { // Cambio password

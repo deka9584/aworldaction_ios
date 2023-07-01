@@ -24,6 +24,6 @@ struct ImagePickerView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
-        // Nothing to update here
+        // Nessun aggiornamento necessario
     }
 }

@@ -10,7 +10,8 @@ import SwiftUI
 struct AccountView: View {
     @EnvironmentObject var appSettings: AppSettings
     @StateObject var accountModel = AccountModel()
-    @State var isPresentingConfirm = false
+    @State var removePictureConfirm = false
+    @State var logoutConfirm = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -59,10 +60,20 @@ struct AccountView: View {
                     .padding()
                     
                     VStack {
+                        if (accountModel.message != "") {
+                            Text(accountModel.message)
+                                .foregroundColor(.red)
+                                .font(.caption)
+                                .textCase(.uppercase)
+                                .padding()
+                        }
+                        
                         Button {
                             accountModel.showChangePass = true
                         } label: {
                             Text("Cambia password")
+                                .bold()
+                                .textCase(.uppercase)
                                 .padding()
                                 .foregroundColor(Color.white)
                                 .background(Color.orange)
@@ -70,7 +81,24 @@ struct AccountView: View {
                         }
                         
                         Button(role: .destructive) {
-                            isPresentingConfirm = true
+                            removePictureConfirm = true
+                        } label: {
+                            Text("Rimuovi immage profilo")
+                                .bold()
+                                .textCase(.uppercase)
+                                .padding()
+                                .foregroundColor(Color.white)
+                                .background(Color.orange)
+                                .cornerRadius(12)
+                        }
+                        .confirmationDialog("Vuoi rimuovere la tua immagine profilo?", isPresented: $removePictureConfirm) {
+                            Button("Rimuovi", role: .destructive) {
+                                accountModel.deleteImage(usrToken: appSettings.usrToken)
+                            }
+                        }
+                        
+                        Button(role: .destructive) {
+                            logoutConfirm = true
                         } label: {
                             Text(StringComponents.logoutBtn)
                                 .bold()
@@ -80,7 +108,7 @@ struct AccountView: View {
                                 .background(Color.red)
                                 .cornerRadius(12)
                         }
-                        .confirmationDialog("Vuoi uscire dal tuo account?", isPresented: $isPresentingConfirm) {
+                        .confirmationDialog("Vuoi uscire dal tuo account?", isPresented: $logoutConfirm) {
                             Button("Esci", role: .destructive) {
                                 appSettings.logout()
                             }
@@ -90,17 +118,14 @@ struct AccountView: View {
                 .navigationTitle("Il tuo account")
             }
         }
+        .onAppear() {
+            accountModel.message = ""
+        }
         .fullScreenCover(isPresented: $accountModel.showPictUpload) {
             UploadProfilePictView(accountModel: accountModel)
         }
         .fullScreenCover(isPresented: $accountModel.showChangePass, content: {
             ChangePasswordView(accountModel: accountModel)
         })
-    }
-}
-
-struct AccountView_Previews: PreviewProvider {
-    static var previews: some View {
-        AccountView()
     }
 }
