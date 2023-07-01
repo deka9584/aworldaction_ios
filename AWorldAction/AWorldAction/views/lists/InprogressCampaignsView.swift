@@ -17,22 +17,7 @@ struct InprogressCampaignsView: View {
             NavigationView {
                 ScrollView {
                     if (!cListModel.campaignList.isEmpty) {
-                        Button {
-                            showCreate = true
-                        } label: {
-                            HStack {
-                                Image(systemName: "location.circle.fill")
-                                    .imageScale(.large)
-                                    .padding()
-                                Text("Pubblica nuova campagna")
-                                    .font(.title2)
-                            }
-                            .padding(1)
-                            .frame(maxWidth: .infinity)
-                            .background(ColorComponents.lightGray)
-                            .cornerRadius(12)
-                        }
-                        .padding()
+                        createCampaignBtn
                         
                         ForEach(cListModel.campaignList) {
                             campaign in
@@ -47,22 +32,7 @@ struct InprogressCampaignsView: View {
                                 refresh()
                             }
                     } else {
-                        Button {
-                            showCreate = true
-                        } label: {
-                            HStack {
-                                Image(systemName: "location.circle.fill")
-                                    .imageScale(.large)
-                                    .padding()
-                                Text("Crea la prima campagna")
-                                    .font(.title2)
-                            }
-                            .padding(1)
-                            .frame(maxWidth: .infinity)
-                            .background(ColorComponents.lightGray)
-                            .cornerRadius(12)
-                        }
-                        .padding()
+                        createCampaignBtn
                         
                         Text(StringComponents.campaignListEmpty)
                             .padding(.top)
@@ -86,6 +56,25 @@ struct InprogressCampaignsView: View {
                 refresh()
             }
         }
+    }
+    
+    var createCampaignBtn: some View {
+        Button {
+            showCreate = true
+        } label: {
+            HStack {
+                Image(systemName: "location.circle.fill")
+                    .imageScale(.large)
+                    .padding()
+                Text("Pubblica nuova campagna")
+                    .font(.title2)
+            }
+            .padding(1)
+            .frame(maxWidth: .infinity)
+            .background(ColorComponents.lightGray)
+            .cornerRadius(12)
+        }
+        .padding()
     }
     
     func refresh() {

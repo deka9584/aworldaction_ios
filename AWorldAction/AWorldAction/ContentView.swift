@@ -15,21 +15,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if (appSettings.usrToken != "") {
-                if (appSettings.requestFailed) { // Errore di comunicazione con il server
-                    Image(systemName: "person.crop.circle.badge.exclamationmark.fill")
-                        .imageScale(.large)
-                    Text(StringComponents.tokenVerificationError)
-                        .padding()
-                    Button {
-                        appSettings.checkAuth()
-                    } label: {
-                        Text(StringComponents.retryBtn)
-                    }
+                if (appSettings.requestFailed) {
+                    ConnectionErrorView()
                 } else {
-                    HomeView() // Se loggato mostra home view
+                    HomeView() // Utente loggato
                 }
             } else {
-                WelcomeView() // Se non loggato mostra accedi / registrati
+                WelcomeView() // Utente non loggato
             }
         }
         .onAppear() {

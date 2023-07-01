@@ -35,6 +35,7 @@
 		EA76FD222A2DD97400A35B95 /* CompletedCampaignsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD212A2DD97400A35B95 /* CompletedCampaignsView.swift */; };
 		EA76FD242A2DDC5300A35B95 /* FavouritesCampaignsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76FD232A2DDC5300A35B95 /* FavouritesCampaignsView.swift */; };
 		EA77776C2A176A490006F68F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EA77776B2A176A490006F68F /* Alamofire */; };
+		EA806D8A2A503655003CD009 /* ConnectionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA806D892A503655003CD009 /* ConnectionErrorView.swift */; };
 		EA9404F62A33BBBB00BD852D /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9404F52A33BBBB00BD852D /* Comment.swift */; };
 		EA9625FA2A1773AE00D792A4 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9625F92A1773AE00D792A4 /* AuthResponse.swift */; };
 		EA9625FF2A177C8700D792A4 /* LoggedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9625FE2A177C8700D792A4 /* LoggedUser.swift */; };
@@ -84,6 +85,7 @@
 		EA76FD1D2A2D00ED00A35B95 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		EA76FD212A2DD97400A35B95 /* CompletedCampaignsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedCampaignsView.swift; sourceTree = "<group>"; };
 		EA76FD232A2DDC5300A35B95 /* FavouritesCampaignsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCampaignsView.swift; sourceTree = "<group>"; };
+		EA806D892A503655003CD009 /* ConnectionErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionErrorView.swift; sourceTree = "<group>"; };
 		EA9404F52A33BBBB00BD852D /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		EA9625F92A1773AE00D792A4 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		EA9625FE2A177C8700D792A4 /* LoggedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedUser.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				EA0B43F32A3243C500EC3923 /* UserPictureView.swift */,
 				EA3F3E232A4CBE5E00317177 /* MapView.swift */,
 				EA3F3E342A4DD83400317177 /* CampaignCarouselView.swift */,
+				EA806D892A503655003CD009 /* ConnectionErrorView.swift */,
 			);
 			path = sections;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				EA3F3E2C2A4DBC3000317177 /* ImagePickerView.swift in Sources */,
 				EA5475192A2B737900EA5210 /* HomeView.swift in Sources */,
 				EA46FC592A4E24A500B4ECAC /* UploadProfilePictView.swift in Sources */,
+				EA806D8A2A503655003CD009 /* ConnectionErrorView.swift in Sources */,
 				EA3F3E242A4CBE5E00317177 /* MapView.swift in Sources */,
 				EA6019152A2FA15900EF337F /* DetailView.swift in Sources */,
 				EA3F3E2F2A4DBF8400317177 /* ImagePickerCoordinator.swift in Sources */,

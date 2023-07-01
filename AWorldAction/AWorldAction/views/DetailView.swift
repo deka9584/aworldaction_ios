@@ -170,7 +170,7 @@ struct DetailView: View {
                                         .foregroundColor(Color.orange)
                                 }
                                 
-                                Button {
+                                Button(role: .destructive) {
                                     editingComment = comment
                                     deleteCommentConfirm = true
                                 } label: {
@@ -231,7 +231,7 @@ struct DetailView: View {
                             }
                         }
                         
-                        Button {
+                        Button(role: .destructive) {
                             deleteCampaignConfirm = true
                         } label: {
                             Text("Elimina campagna")

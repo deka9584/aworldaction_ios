@@ -57,7 +57,7 @@ struct CampaignCarouselView: View {
                             HStack {
                                 Spacer()
                                 
-                                Button {
+                                Button(role: .destructive) {
                                     deletePictureConfirm = true
                                     editingPicutureId = picture.id
                                 } label: {
