@@ -10,6 +10,7 @@
 		EA0B43F42A3243C500EC3923 /* UserPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0B43F32A3243C500EC3923 /* UserPictureView.swift */; };
 		EA19598729DEDD6B006E1D5A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA19598629DEDD6B006E1D5A /* LoginView.swift */; };
 		EA19598929DF51F9006E1D5A /* StringComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA19598829DF51F9006E1D5A /* StringComponents.swift */; };
+		EA3E617F2B25EB8C00B566F4 /* ActionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E617E2B25EB8C00B566F4 /* ActionBarView.swift */; };
 		EA3F3E222A4CBBB400317177 /* CreateCampaignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E212A4CBBB400317177 /* CreateCampaignView.swift */; };
 		EA3F3E242A4CBE5E00317177 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E232A4CBE5E00317177 /* MapView.swift */; };
 		EA3F3E282A4CBFA900317177 /* CreateCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3F3E272A4CBFA900317177 /* CreateCampaignModel.swift */; };
@@ -46,8 +47,7 @@
 		EAC7BF1629EDAD3B001650E7 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7BF1529EDAD3B001650E7 /* RegisterView.swift */; };
 		EAC7BF1829EDAD8D001650E7 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7BF1729EDAD8D001650E7 /* RegisterModel.swift */; };
 		EAC7BF1C29EDB90C001650E7 /* Register2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC7BF1B29EDB90C001650E7 /* Register2View.swift */; };
-		EADACEB92A31D7C000EC19D6 /* FetchCampaignsErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADACEB82A31D7C000EC19D6 /* FetchCampaignsErrorView.swift */; };
-		EAE244E22A039EEF00D03599 /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE244E12A039EEF00D03599 /* WelcomeModel.swift */; };
+		EADACEB92A31D7C000EC19D6 /* CampaignLoadErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADACEB82A31D7C000EC19D6 /* CampaignLoadErrorView.swift */; };
 		EAE244E52A03A13300D03599 /* ColorComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE244E42A03A13300D03599 /* ColorComponents.swift */; };
 		EAE244EA2A03AC1E00D03599 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE244E92A03AC1E00D03599 /* AppSettings.swift */; };
 		FF2E1E9529D57C380033072D /* AWorldActionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2E1E9429D57C380033072D /* AWorldActionApp.swift */; };
@@ -61,6 +61,7 @@
 		EA0B43F32A3243C500EC3923 /* UserPictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPictureView.swift; sourceTree = "<group>"; };
 		EA19598629DEDD6B006E1D5A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		EA19598829DF51F9006E1D5A /* StringComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringComponents.swift; sourceTree = "<group>"; };
+		EA3E617E2B25EB8C00B566F4 /* ActionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionBarView.swift; sourceTree = "<group>"; };
 		EA3F3E212A4CBBB400317177 /* CreateCampaignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCampaignView.swift; sourceTree = "<group>"; };
 		EA3F3E232A4CBE5E00317177 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EA3F3E272A4CBFA900317177 /* CreateCampaignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCampaignModel.swift; sourceTree = "<group>"; };
@@ -96,8 +97,7 @@
 		EAC7BF1529EDAD3B001650E7 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		EAC7BF1729EDAD8D001650E7 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		EAC7BF1B29EDB90C001650E7 /* Register2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register2View.swift; sourceTree = "<group>"; };
-		EADACEB82A31D7C000EC19D6 /* FetchCampaignsErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCampaignsErrorView.swift; sourceTree = "<group>"; };
-		EAE244E12A039EEF00D03599 /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
+		EADACEB82A31D7C000EC19D6 /* CampaignLoadErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignLoadErrorView.swift; sourceTree = "<group>"; };
 		EAE244E42A03A13300D03599 /* ColorComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorComponents.swift; sourceTree = "<group>"; };
 		EAE244E92A03AC1E00D03599 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		FF2E1E9129D57C380033072D /* AWorldAction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AWorldAction.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,7 +136,6 @@
 			children = (
 				EAB3765C29E060BB003899BA /* LoginModel.swift */,
 				EAC7BF1729EDAD8D001650E7 /* RegisterModel.swift */,
-				EAE244E12A039EEF00D03599 /* WelcomeModel.swift */,
 			);
 			path = auth;
 			sourceTree = "<group>";
@@ -145,11 +144,12 @@
 			isa = PBXGroup;
 			children = (
 				EA5475212A2B91FF00EA5210 /* CampaignBoxView.swift */,
-				EADACEB82A31D7C000EC19D6 /* FetchCampaignsErrorView.swift */,
+				EADACEB82A31D7C000EC19D6 /* CampaignLoadErrorView.swift */,
 				EA0B43F32A3243C500EC3923 /* UserPictureView.swift */,
 				EA3F3E232A4CBE5E00317177 /* MapView.swift */,
 				EA3F3E342A4DD83400317177 /* CampaignCarouselView.swift */,
 				EA806D892A503655003CD009 /* ConnectionErrorView.swift */,
+				EA3E617E2B25EB8C00B566F4 /* ActionBarView.swift */,
 			);
 			path = sections;
 			sourceTree = "<group>";
@@ -363,7 +363,7 @@
 				EA3F3E282A4CBFA900317177 /* CreateCampaignModel.swift in Sources */,
 				EA76FD192A2CE76200A35B95 /* AccountView.swift in Sources */,
 				EAB3765D29E060BB003899BA /* LoginModel.swift in Sources */,
-				EADACEB92A31D7C000EC19D6 /* FetchCampaignsErrorView.swift in Sources */,
+				EADACEB92A31D7C000EC19D6 /* CampaignLoadErrorView.swift in Sources */,
 				EA3F3E2A2A4CC32700317177 /* LocationManager.swift in Sources */,
 				EA76FD1C2A2D006000A35B95 /* RoundedCorner.swift in Sources */,
 				EA3F3E352A4DD83400317177 /* CampaignCarouselView.swift in Sources */,
@@ -382,7 +382,6 @@
 				EA9625FF2A177C8700D792A4 /* LoggedUser.swift in Sources */,
 				EAC7BF1629EDAD3B001650E7 /* RegisterView.swift in Sources */,
 				EA9625FA2A1773AE00D792A4 /* AuthResponse.swift in Sources */,
-				EAE244E22A039EEF00D03599 /* WelcomeModel.swift in Sources */,
 				EAC7BF1829EDAD8D001650E7 /* RegisterModel.swift in Sources */,
 				EA46FC5B2A4E296B00B4ECAC /* Utils.swift in Sources */,
 				EA6019172A2FA53C00EF337F /* DetailModel.swift in Sources */,
@@ -396,6 +395,7 @@
 				EAE244E52A03A13300D03599 /* ColorComponents.swift in Sources */,
 				EA9E12762A41C4E800A00C1A /* AccountModel.swift in Sources */,
 				FF2E1E9529D57C380033072D /* AWorldActionApp.swift in Sources */,
+				EA3E617F2B25EB8C00B566F4 /* ActionBarView.swift in Sources */,
 				EA76FD222A2DD97400A35B95 /* CompletedCampaignsView.swift in Sources */,
 				EA5475222A2B91FF00EA5210 /* CampaignBoxView.swift in Sources */,
 				EAC7BF1C29EDB90C001650E7 /* Register2View.swift in Sources */,

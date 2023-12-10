@@ -12,23 +12,26 @@ struct FavouritesCampaignsView: View {
     @StateObject var cListModel = CampaignListModel(toShow: "favourites")
     
     var body: some View {
-        VStack(spacing: 0) {
-            NavigationView {
+        NavigationView {
+            VStack(spacing: 0) {
+                ActionBarView(title: "Campagne completate")
+                
                 ScrollView {
-                    if (!cListModel.campaignList.isEmpty) {
-                        ForEach(cListModel.campaignList) {
-                            campaign in
-                            CampaignBoxView(campaign: campaign)
-                        }
-                    } else if (cListModel.loading) {
+                    if (cListModel.loading) {
                         ProgressView()
                             .padding()
-                    } else if (cListModel.failed) {
-                        FetchCampaignsErrorView()
-                            .onTapGesture {
-                                refresh()
-                            }
-                    } else {
+                    }
+                    
+                    ForEach(cListModel.campaignList) {
+                        campaign in
+                        CampaignBoxView(campaign: campaign)
+                    }
+                    
+                    if (cListModel.failed) {
+                        CampaignLoadErrorView(retryAction: {
+                            refresh()
+                        })
+                    } else if (cListModel.campaignList.isEmpty) {
                         Image(systemName: "star.fill")
                             .imageScale(.large)
                             .foregroundColor(ColorComponents.green)
@@ -37,7 +40,6 @@ struct FavouritesCampaignsView: View {
                             .padding(.top)
                     }
                 }
-                .navigationTitle("Preferiti")
                 .refreshable {
                     refresh()
                 }
@@ -56,5 +58,6 @@ struct FavouritesCampaignsView: View {
 struct FavouritesCampaignsView_Previews: PreviewProvider {
     static var previews: some View {
         FavouritesCampaignsView()
+            .environmentObject(AppSettings())
     }
 }

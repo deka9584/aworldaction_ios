@@ -8,32 +8,15 @@
 import SwiftUI
 
 struct RegisterView: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var appSettings: AppSettings
-    @ObservedObject var welcomeModel: WelcomeModel
     @ObservedObject var registerModel = RegisterModel()
     
     var body: some View {
-        
         VStack {
-            ZStack {
-                HStack {
-                    Button {
-                        welcomeModel.showRegisterView = false
-                    } label: {
-                        Image(systemName: "arrowtriangle.backward.fill")
-                            .imageScale(.large)
-                            .foregroundColor(Color.white)
-                            .padding(.horizontal)
-                    }
-                    Spacer()
-                }
-                Text(StringComponents.registerViewTitle)
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(Color.white)
-            }
-            .frame(maxWidth: .infinity, minHeight: 60)
-            .background(ColorComponents.lightGreen)
+            ActionBarView(backAction: {
+                presentationMode.wrappedValue.dismiss()
+            }, title: StringComponents.registerViewTitle)
             
             Spacer()
             
@@ -62,6 +45,7 @@ struct RegisterView: View {
                     registerModel.nextStep()
                 } label: {
                     Text(StringComponents.nextBtn)
+                        .bold()
                         .frame(maxWidth: .infinity, minHeight: 50)
                         .background(ColorComponents.lightGreen)
                         .foregroundColor(Color.white)
@@ -76,21 +60,20 @@ struct RegisterView: View {
                         .padding(.top)
                 }
                 
-                VStack(spacing: 14) {
-                    Button {
-                        welcomeModel.showRegisterView = false
-                        welcomeModel.showLoginView = true
-                    } label: {
-                        Text(StringComponents.loginLink)
-                    }
-                }
+                NavigationLink(destination: {
+                    LoginView()
+                }, label: {
+                    Text(StringComponents.loginLink)
+                        .foregroundColor(.blue)
+                })
                 .padding(.vertical)
             }
             .padding()
             
             Spacer()
         }
-        .fullScreenCover(isPresented: $registerModel.showChosePassword, content: {
+        .navigationBarBackButtonHidden()
+        .navigationDestination(isPresented: $registerModel.showChosePassword, destination: {
             Register2View(registerModel: registerModel)
         })
     }
@@ -98,6 +81,6 @@ struct RegisterView: View {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView(welcomeModel: WelcomeModel())
+        RegisterView()
     }
 }

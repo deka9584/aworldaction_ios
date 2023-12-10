@@ -8,31 +8,15 @@
 import SwiftUI
 
 struct Register2View: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var appSettings: AppSettings
     @ObservedObject var registerModel: RegisterModel
     
     var body: some View {
-        
         VStack {
-            ZStack {
-                HStack {
-                    Button {
-                        registerModel.showChosePassword = false
-                    } label: {
-                        Image(systemName: "arrowtriangle.backward.fill")
-                            .imageScale(.large)
-                            .foregroundColor(Color.white)
-                            .padding(.horizontal)
-                    }
-                    Spacer()
-                }
-                Text(StringComponents.registerViewTitle)
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(Color.white)
-            }
-            .frame(maxWidth: .infinity, minHeight: 60)
-            .background(ColorComponents.lightGreen)
+            ActionBarView(backAction: {
+                presentationMode.wrappedValue.dismiss()
+            }, title: StringComponents.registerViewTitle)
             
             Spacer()
             
@@ -66,6 +50,7 @@ struct Register2View: View {
                         }
                         
                         Text(StringComponents.nextBtn)
+                            .bold()
                             .frame(maxWidth: .infinity, minHeight: 50)
                             .background(ColorComponents.lightGreen)
                             .foregroundColor(Color.white)
@@ -78,6 +63,7 @@ struct Register2View: View {
             
             Spacer()
         }
+        .navigationBarBackButtonHidden()
     }
 }
 

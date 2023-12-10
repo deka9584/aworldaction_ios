@@ -13,36 +13,50 @@ struct InprogressCampaignsView: View {
     @State var showCreate = false
     
     var body: some View {
-        VStack(spacing: 0) {
-            NavigationView {
+        NavigationView {
+            VStack(spacing: 0) {
+                ActionBarView(title: "Campagne in corso")
+                
                 ScrollView {
-                    if (!cListModel.campaignList.isEmpty) {
-                        createCampaignBtn
-                        
-                        ForEach(cListModel.campaignList) {
-                            campaign in
-                            CampaignBoxView(campaign: campaign)
+                    Button {
+                        showCreate = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "location.circle.fill")
+                                .imageScale(.large)
+                                .padding()
+                            Text("Pubblica nuova campagna")
+                                .font(.title2)
                         }
-                    } else if (cListModel.loading) {
+                        .padding(1)
+                        .frame(maxWidth: .infinity)
+                        .background(ColorComponents.lightGray)
+                        .cornerRadius(12)
+                    }
+                    .padding()
+                    
+                    if (cListModel.loading) {
                         ProgressView()
                             .padding()
-                    } else if (cListModel.failed) {
-                        FetchCampaignsErrorView()
-                            .onTapGesture {
-                                refresh()
-                            }
-                    } else {
-                        createCampaignBtn
-                        
+                    }
+                    
+                    ForEach(cListModel.campaignList) {
+                        campaign in
+                        CampaignBoxView(campaign: campaign)
+                    }
+                    
+                    if (cListModel.failed) {
+                        CampaignLoadErrorView(retryAction: {
+                            refresh()
+                        })
+                    } else if (cListModel.campaignList.isEmpty) {
                         Text(StringComponents.campaignListEmpty)
                             .padding(.top)
                     }
                 }
-                .navigationTitle("Campagne in corso")
                 .refreshable {
                     refresh()
                 }
-                
             }
         }
         .onAppear() {
@@ -80,4 +94,9 @@ struct InprogressCampaignsView: View {
     func refresh() {
         cListModel.loadCampaigns(usrToken: appSettings.usrToken)
     }
+}
+
+#Preview {
+    InprogressCampaignsView(cListModel: CampaignListModel(toShow: "inprogress"))
+        .environmentObject(AppSettings())
 }

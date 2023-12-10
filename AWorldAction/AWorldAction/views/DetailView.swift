@@ -21,12 +21,12 @@ struct DetailView: View {
     @State var deleteCampaignConfirm = false
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
+            ActionBarView(backAction: {
+                presentationMode.wrappedValue.dismiss()
+            }, title: detailModel.campaign?.name ?? "Nome campagna", rounded: false)
+            
             ScrollView {
-                Text(detailModel.campaign?.name ?? "Nome campagna")
-                    .font(.title)
-                    .padding()
-                
                 CampaignCarouselView(detailModel: detailModel, showUpload: $showUpload)
                 
                 Text("Dettagli")
@@ -251,15 +251,11 @@ struct DetailView: View {
             }
         }
         .onAppear() {
-            if (campaignId != 0) {
-                detailModel.fetch(usrToken: appSettings.usrToken, campaignId: campaignId)
-            }
+            loadCampaign()
         }
         .overlay() {
             if (detailModel.loading) {
-                VStack {
-                    ProgressView()
-                }
+                ProgressView()
             }
         }
         .fullScreenCover(isPresented: $showUpload, content: {
@@ -279,10 +275,17 @@ struct DetailView: View {
             }
         }
     }
+    
+    func loadCampaign() {
+        if (campaignId != 0) {
+            detailModel.fetch(usrToken: appSettings.usrToken, campaignId: campaignId)
+        }
+    }
 }
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView(campaignId: 0)
+            .environmentObject(AppSettings())
     }
 }

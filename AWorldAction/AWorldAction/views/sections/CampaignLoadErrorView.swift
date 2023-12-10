@@ -7,18 +7,24 @@
 
 import SwiftUI
 
-struct FetchCampaignsErrorView: View {
+struct CampaignLoadErrorView: View {
+    var retryAction: () -> Void
+    
     var body: some View {
         VStack {
             Image(systemName: "exclamationmark.circle.fill")
                 .imageScale(.large)
                 .foregroundColor(.red)
                 .padding(.top)
+            
             Text(StringComponents.campaignListFetchError)
                 .padding(.top)
-            Text(StringComponents.retryBtn)
-                .padding(.top)
-                .foregroundColor(Color.blue)
+                .multilineTextAlignment(.center)
+            
+            Button(action: retryAction, label: {
+                Text(StringComponents.retryBtn)
+            })
+            .padding(.top)
         }
         .padding()
     }
@@ -26,6 +32,6 @@ struct FetchCampaignsErrorView: View {
 
 struct FetchCampaignsError_Previews: PreviewProvider {
     static var previews: some View {
-        FetchCampaignsErrorView()
+        CampaignLoadErrorView(retryAction: {})
     }
 }

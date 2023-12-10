@@ -8,31 +8,15 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var appSettings: AppSettings
-    @ObservedObject var welcomeModel: WelcomeModel
     @ObservedObject var loginModel = LoginModel()
     
     var body: some View {
         VStack {
-            ZStack {
-                HStack {
-                    Button {
-                        welcomeModel.showLoginView = false
-                    } label: {
-                        Image(systemName: "arrowtriangle.backward.fill")
-                            .imageScale(.large)
-                            .foregroundColor(Color.white)
-                            .padding(.horizontal)
-                    }
-                    Spacer()
-                }
-                Text(StringComponents.loginViewTitle)
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(Color.white)
-            }
-            .frame(maxWidth: .infinity, minHeight: 60)
-            .background(ColorComponents.lightGreen)
+            ActionBarView(backAction: {
+                presentationMode.wrappedValue.dismiss()
+            }, title: StringComponents.loginViewTitle)
             
             Spacer()
             
@@ -60,9 +44,10 @@ struct LoginView: View {
                     ZStack {
                         if (loginModel.loading) {
                             ProgressView()
-                        }
+                        } 
                         
                         Text(StringComponents.loginBtn)
+                            .bold()
                             .frame(maxWidth: .infinity, minHeight: 50)
                             .background(ColorComponents.lightGreen)
                             .foregroundColor(Color.white)
@@ -71,7 +56,7 @@ struct LoginView: View {
                 }
                 .disabled(loginModel.loading)
                 
-                if (loginModel.status != "") { // Se presente un messaggio di status mostra il testo
+                if (loginModel.status != "") {
                     Text(loginModel.status)
                         .foregroundColor(Color.red)
                         .textCase(Text.Case.uppercase)
@@ -79,25 +64,24 @@ struct LoginView: View {
                         .padding(.top)
                 }
                 
-                VStack {
-                    Button {
-                        welcomeModel.showLoginView = false
-                        welcomeModel.showRegisterView = true
-                    } label: {
-                        Text(StringComponents.registerBtn)
-                    }
-                }
+                NavigationLink(destination: {
+                    RegisterView()
+                }, label: {
+                    Text(StringComponents.loginLink)
+                        .foregroundColor(.blue)
+                })
                 .padding(.vertical)
             }
             .padding()
             
             Spacer()
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(welcomeModel: WelcomeModel())
+        LoginView()
     }
 }

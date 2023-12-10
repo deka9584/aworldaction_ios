@@ -13,7 +13,8 @@ struct AWorldActionApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(appSettings)
+            ContentView()
+                .environmentObject(appSettings)
         }
     }
 }
