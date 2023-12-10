@@ -18,9 +18,7 @@ struct InprogressCampaignsView: View {
                 ActionBarView(title: "Campagne in corso")
                 
                 ScrollView {
-                    Button {
-                        showCreate = true
-                    } label: {
+                    NavigationLink(destination: CreateCampaignView(), label: {
                         HStack {
                             Image(systemName: "location.circle.fill")
                                 .imageScale(.large)
@@ -32,13 +30,8 @@ struct InprogressCampaignsView: View {
                         .frame(maxWidth: .infinity)
                         .background(ColorComponents.lightGray)
                         .cornerRadius(12)
-                    }
+                    })
                     .padding()
-                    
-                    if (cListModel.loading) {
-                        ProgressView()
-                            .padding()
-                    }
                     
                     ForEach(cListModel.campaignList) {
                         campaign in
@@ -62,12 +55,14 @@ struct InprogressCampaignsView: View {
         .onAppear() {
             refresh()
         }
-        .fullScreenCover(isPresented: $showCreate, content: {
-            CreateCampaignView(showCreate: $showCreate)
-        })
         .onChange(of: showCreate) { showCreateStatus in
             if (!showCreateStatus) {
                 refresh()
+            }
+        }
+        .overlay() {
+            if (cListModel.loading) {
+                ProgressView()
             }
         }
     }

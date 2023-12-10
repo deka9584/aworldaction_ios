@@ -16,26 +16,9 @@ struct ChangePasswordView: View {
     
     var body: some View {
         VStack {
-            ZStack {
-                HStack {
-                    Spacer()
-                    
-                    Button {
-                        close()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .imageScale(.large)
-                            .foregroundColor(Color.white)
-                            .padding(.horizontal)
-                    }
-                }
-                Text("Cambia password")
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(Color.white)
-            }
-            .frame(maxWidth: .infinity, minHeight: 60)
-            .background(ColorComponents.lightGreen)
+            ActionBarView(backAction: {
+                close()
+            }, title: "Cambia password", rounded: false)
             
             Spacer()
             

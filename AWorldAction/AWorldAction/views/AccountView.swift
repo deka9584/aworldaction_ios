@@ -15,108 +15,98 @@ struct AccountView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            NavigationView {
-                ScrollView {
-                    HStack {
-                        ZStack {
-                            if let path = appSettings.user?.picture_path {
-                                AsyncImage(
-                                    url: appSettings.getStorageUrl(path: path),
-                                    content: {
-                                        image in image.resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .clipShape(Circle())
-                                    },
-                                    placeholder: {
-                                        ProgressView()
-                                    }
-                                )
-                                .frame(width: 80, height: 80)
-                                .clipped()
-                            } else {
-                                Image(systemName: "person.circle.fill")
-                                    .resizable()
+            ActionBarView(title: "Account")
+            
+            HStack {
+                ZStack {
+                    if let path = appSettings.user?.picture_path {
+                        AsyncImage(
+                            url: appSettings.getStorageUrl(path: path),
+                            content: {
+                                image in image.resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                            },
+                            placeholder: {
+                                ProgressView()
                             }
-                        }
-                        .onTapGesture {
-                            accountModel.showPictUpload = true
-                        }
-                        VStack(alignment: .leading) {
-                            Text(appSettings.user?.name ?? "Utente")
-                                .font(.body)
-                                .padding(.bottom, 1)
-                            Text(appSettings.getRoleName(roleId: appSettings.user?.role_id ?? 0))
-                                .font(.caption)
-                                .textCase(.uppercase)
-                        }
-                        .padding()
-                        Spacer()
+                        )
+                        .frame(width: 80, height: 80)
+                        .clipped()
+                    } else {
+                        Image(systemName: "person.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 80, height: 80)
                     }
+                }
+                .onTapGesture {
+                    accountModel.showPictUpload = true
+                }
+                VStack(alignment: .leading) {
+                    Text(appSettings.user?.name ?? "Utente")
+                        .font(.body)
+                        .padding(.bottom, 1)
+                    Text(appSettings.getRoleName(roleId: appSettings.user?.role_id ?? 0))
+                        .font(.caption)
+                        .textCase(.uppercase)
+                }
+                .padding()
+                Spacer()
+            }
+            .padding()
+            .background(ColorComponents.lightGray)
+            .cornerRadius(12)
+            .padding()
+            
+            VStack {
+                if (accountModel.message != "") {
+                    Text(accountModel.message)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                        .textCase(.uppercase)
+                        .padding()
+                }
+                
+                Text("Opzioni account")
+                    .font(.title2)
+                    .bold()
                     .padding()
-                    .background(ColorComponents.lightGray)
-                    .cornerRadius(12)
-                    .padding()
+                
+                List {
+                    Button {
+                        accountModel.showChangePass = true
+                    } label: {
+                        Text("Cambia password")
+                    }
                     
-                    VStack {
-                        if (accountModel.message != "") {
-                            Text(accountModel.message)
-                                .foregroundColor(.red)
-                                .font(.caption)
-                                .textCase(.uppercase)
-                                .padding()
+                    Button(role: .destructive) {
+                        removePictureConfirm = true
+                    } label: {
+                        Text("Rimuovi immage profilo")
+                    }
+                    .confirmationDialog("Vuoi rimuovere la tua immagine profilo?", isPresented: $removePictureConfirm) {
+                        Button("Rimuovi", role: .destructive) {
+                            accountModel.deleteImage(usrToken: appSettings.usrToken)
                         }
-                        
-                        Button {
-                            accountModel.showChangePass = true
-                        } label: {
-                            Text("Cambia password")
-                                .bold()
-                                .textCase(.uppercase)
-                                .padding()
-                                .foregroundColor(Color.white)
-                                .background(Color.orange)
-                                .cornerRadius(12)
-                        }
-                        
-                        Button(role: .destructive) {
-                            removePictureConfirm = true
-                        } label: {
-                            Text("Rimuovi immage profilo")
-                                .bold()
-                                .textCase(.uppercase)
-                                .padding()
-                                .foregroundColor(Color.white)
-                                .background(Color.orange)
-                                .cornerRadius(12)
-                        }
-                        .confirmationDialog("Vuoi rimuovere la tua immagine profilo?", isPresented: $removePictureConfirm) {
-                            Button("Rimuovi", role: .destructive) {
-                                accountModel.deleteImage(usrToken: appSettings.usrToken)
-                            }
-                        }
-                        
-                        Button(role: .destructive) {
-                            logoutConfirm = true
-                        } label: {
-                            Text(StringComponents.logoutBtn)
-                                .bold()
-                                .textCase(.uppercase)
-                                .padding()
-                                .foregroundColor(Color.white)
-                                .background(Color.red)
-                                .cornerRadius(12)
-                        }
-                        .confirmationDialog("Vuoi uscire dal tuo account?", isPresented: $logoutConfirm) {
-                            Button("Esci", role: .destructive) {
-                                appSettings.logout()
-                            }
+                    }
+                    
+                    Button(role: .destructive) {
+                        logoutConfirm = true
+                    } label: {
+                        Text(StringComponents.logoutBtn)
+                    }
+                    .confirmationDialog("Vuoi uscire dal tuo account?", isPresented: $logoutConfirm) {
+                        Button("Esci", role: .destructive) {
+                            appSettings.logout()
                         }
                     }
                 }
-                .navigationTitle("Il tuo account")
+                .listStyle(.plain)
+                .padding(.horizontal)
             }
+            
+            
         }
         .onAppear() {
             accountModel.message = ""
@@ -128,4 +118,9 @@ struct AccountView: View {
             ChangePasswordView(accountModel: accountModel)
         })
     }
+}
+
+#Preview {
+    AccountView()
+        .environmentObject(AppSettings())
 }

@@ -207,29 +207,25 @@ struct DetailView: View {
                             .cornerRadius(12)
                     }
                     
-                    if (detailModel.campaign?.creator_id?.contains(appSettings.user?.id ?? 0) ?? false) {
-                        
-                        if (detailModel.campaign?.completed == 1) {
-                            Button {
-                                detailModel.update(usrToken: appSettings.usrToken, campaignId: campaignId, campaignStatus: false)
-                            } label: {
+                    if (isCreatorLogged()) {
+                        Button(action: {
+                            var newStatus = detailModel.campaign?.completed != 1
+                            detailModel.update(usrToken: appSettings.usrToken, campaignId: campaignId, campaignStatus: newStatus)
+                        }, label: {
+                            if (detailModel.campaign?.completed == 1) {
                                 Text("Contrassegna come ancora in corso")
                                     .padding(10)
                                     .foregroundColor(Color.white)
                                     .background(Color.orange)
                                     .cornerRadius(12)
-                            }
-                        } else {
-                            Button {
-                                detailModel.update(usrToken: appSettings.usrToken, campaignId: campaignId, campaignStatus: true)
-                            } label: {
+                            } else {
                                 Text("Contrassegna come completata")
                                     .padding(10)
                                     .foregroundColor(Color.white)
                                     .background(ColorComponents.green)
                                     .cornerRadius(12)
                             }
-                        }
+                        })
                         
                         Button(role: .destructive) {
                             deleteCampaignConfirm = true
@@ -249,6 +245,9 @@ struct DetailView: View {
                 }
                 .padding(.bottom)
             }
+            .refreshable(action: {
+                loadCampaign()
+            })
         }
         .onAppear() {
             loadCampaign()
@@ -271,7 +270,7 @@ struct DetailView: View {
         }
         .onChange(of: showUpload) { showUpload in
             if (!showUpload) {
-                detailModel.fetch(usrToken: appSettings.usrToken, campaignId: campaignId)
+                loadCampaign()
             }
         }
     }
@@ -280,6 +279,10 @@ struct DetailView: View {
         if (campaignId != 0) {
             detailModel.fetch(usrToken: appSettings.usrToken, campaignId: campaignId)
         }
+    }
+    
+    func isCreatorLogged() -> Bool {
+        return detailModel.campaign?.creator_id?.contains(appSettings.user?.id ?? 0) ?? false
     }
 }
 

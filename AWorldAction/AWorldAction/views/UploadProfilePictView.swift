@@ -15,26 +15,9 @@ struct UploadProfilePictView: View {
     
     var body: some View {
         VStack {
-            ZStack {
-                HStack {
-                    Spacer()
-                    
-                    Button {
-                        close()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .imageScale(.large)
-                            .foregroundColor(Color.white)
-                            .padding(.horizontal)
-                    }
-                }
-                Text("Carica immagine")
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(Color.white)
-            }
-            .frame(maxWidth: .infinity, minHeight: 60)
-            .background(ColorComponents.lightGreen)
+            ActionBarView(backAction: {
+                close()
+            }, title: "Carica immagine", rounded: false)
             
             Spacer()
             
